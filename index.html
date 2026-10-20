@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>共通点探しゲーム｜お題150問・答えを選んで一致を自動で数える無料サイト</title>
+<meta name="description" content="共通点探しゲームを、お題を選ぶだけで遊べる無料サイト。答えを4〜6択から選んで一斉にオープン、一致した数を自動で数えて「共通点◯個」を出します。初対面・小学生・仲間内・配信コラボ・年末のお題150問。2〜6人・スマホ1台でも、配信のコラボでも。登録不要。">
+<meta name="theme-color" content="#ff8a3d">
+<link rel="canonical" href="https://kyoutsu.kkpwebninja.com/">
+<!-- WEBNINJA_UNIFIED_FAVICON -->
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
+<meta property="og:title" content="共通点探しゲーム｜答えを選んで一致を自動で数える">
+<meta property="og:description" content="お題150問。答えを選んで一斉にオープン、共通点の数を自動で数えます。2〜6人・配信のコラボにも。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://kyoutsu.kkpwebninja.com/">
+<meta property="og:site_name" content="共通点探しゲーム">
+<meta property="og:image" content="https://kyoutsu.kkpwebninja.com/ogp.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://kyoutsu.kkpwebninja.com/ogp.png">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "共通点探しゲーム",
+  "url": "https://kyoutsu.kkpwebninja.com/",
+  "description": "お題に4〜6択で答えて一斉にオープンし、一致した数を自動で数える共通点探しゲーム。2〜6人。配信のコラボでは離れたゲストが回答コードで答えを送れる。",
+  "applicationCategory": "GameApplication",
+  "operatingSystem": "Web",
+  "offers": {"@type":"Offer","price":"0","priceCurrency":"JPY"},
+  "author": {"@type":"Organization","name":"web忍者の砦"}
+}
+</script>
+
+<!-- 運営者の確認用（?kkptest=1 でこの端末だけオン・?kkptest=0 でオフ）。オンの間は GA4 を送らず広告も読まず、スマホでも配信モードを試せる（ito・haa・ワードウルフと同じ方式） -->
+<script>
+(function(){
+  var t = false;
+  try {
+    if (/[?&]kkptest=1\b/.test(location.search)) localStorage.setItem('kkp-test','1');
+    if (/[?&]kkptest=0\b/.test(location.search)) localStorage.removeItem('kkp-test');
+    t = localStorage.getItem('kkp-test') === '1';
+  } catch(e){}
+  window.__kkpTest = t;
+  if (t) window['ga-disable-G-2LM85GJN0L'] = true;
+})();
+</script>
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2LM85GJN0L"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-2LM85GJN0L');
+</script>
+
+<!-- AdSense
+     配信モード（PCで手動オン・?mode=stream）と、参加リンク（?p=）の回答画面では AdSense のスクリプト自体を読まない（はぁ・ワードウルフと同じ）。
+     スマホでは ?mode=stream も効かない（ふだんの遊び方で広告を消す抜け道にしないため）。
+     ふだんは結果画面を出したときに初めて読む（広告は結果のあとだけ）。 -->
+<script>
+(function(){
+  var on = false;
+  try {
+    if (/[?&]mode=stream\b/.test(location.search)) localStorage.setItem('ky-stream','1');
+    if (/[?&]mode=normal\b/.test(location.search)) localStorage.removeItem('ky-stream');
+    on = localStorage.getItem('ky-stream') === '1';
+  } catch(e){}
+  if (/[?&]mode=stream\b/.test(location.search)) on = true;
+  if (!window.__kkpTest && !(window.matchMedia && window.matchMedia('(min-width:768px)').matches)) on = false;
+  var guest = /[?&]p=/.test(location.search);
+  window.__kyStream = on && !guest;
+  window.__kyGuest = guest;
+  var noAds = on || guest || !!window.__kkpTest;
+  var state = 0, waits = [];
+  window.__kyLoadAds = function(cb){
+    if (noAds) return;
+    if (cb) { if (state === 2) cb(); else waits.push(cb); }
+    if (state) return; state = 1;
+    var s = document.createElement('script');
+    s.async = true; s.crossOrigin = 'anonymous';
+    s.onload = s.onerror = function(){ state = 2; var w = waits; waits = []; w.forEach(function(f){ try { f(); } catch (e) {} }); };
+    s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1298304917726270';
+    document.head.appendChild(s);
+  };
+})();
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700;800&display=swap" rel="stylesheet">
+<!-- k-fonts:start -->
+<link href="https://fonts.googleapis.com/css2?family=Yuji+Syuku&family=RocknRoll+One&display=swap&text=-%2F0123456789%40ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdeijknoprsvw%C2%A9%C2%B7%C3%97%E2%80%A6%E2%88%92%E2%97%AF%E3%80%81%E3%80%82%E3%80%85%E3%80%8C%E3%80%8D%E3%80%9C%E3%81%81%E3%81%82%E3%81%84%E3%81%86%E3%81%88%E3%81%8A%E3%81%8B%E3%81%8C%E3%81%8D%E3%81%8E%E3%81%8F%E3%81%90%E3%81%91%E3%81%92%E3%81%93%E3%81%94%E3%81%95%E3%81%96%E3%81%97%E3%81%98%E3%81%99%E3%81%9A%E3%81%9B%E3%81%9C%E3%81%9D%E3%81%9F%E3%81%A0%E3%81%A1%E3%81%A3%E3%81%A4%E3%81%A5%E3%81%A6%E3%81%A7%E3%81%A8%E3%81%A9%E3%81%AA%E3%81%AB%E3%81%AC%E3%81%AD%E3%81%AE%E3%81%AF%E3%81%B0%E3%81%B1%E3%81%B2%E3%81%B3%E3%81%B4%E3%81%B5%E3%81%B6%E3%81%B7%E3%81%B8%E3%81%B9%E3%81%BB%E3%81%BC%E3%81%BE%E3%81%BF%E3%82%80%E3%82%81%E3%82%82%E3%82%83%E3%82%84%E3%82%85%E3%82%86%E3%82%87%E3%82%88%E3%82%89%E3%82%8A%E3%82%8B%E3%82%8C%E3%82%8D%E3%82%8F%E3%82%92%E3%82%93%E3%82%A1%E3%82%A2%E3%82%A3%E3%82%A4%E3%82%A6%E3%82%A7%E3%82%A8%E3%82%AA%E3%82%AB%E3%82%AD%E3%82%AE%E3%82%AF%E3%82%B0%E3%82%B1%E3%82%B2%E3%82%B3%E3%82%B5%E3%82%B6%E3%82%B7%E3%82%B8%E3%82%B9%E3%82%BA%E3%82%BB%E3%82%BC%E3%82%BD%E3%82%BF%E3%83%80%E3%83%81%E3%83%83%E3%83%84%E3%83%86%E3%83%87%E3%83%88%E3%83%89%E3%83%8A%E3%83%8B%E3%83%8D%E3%83%8E%E3%83%8F%E3%83%90%E3%83%91%E3%83%92%E3%83%93%E3%83%94%E3%83%95%E3%83%96%E3%83%97%E3%83%99%E3%83%9A%E3%83%9B%E3%83%9C%E3%83%9D%E3%83%9E%E3%83%9F%E3%83%A0%E3%83%A1%E3%83%A2%E3%83%A3%E3%83%A5%E3%83%A7%E3%83%A8%E3%83%A9%E3%83%AA%E3%83%AB%E3%83%AC%E3%83%AD%E3%83%AF%E3%83%B3%E3%83%BB%E3%83%BC%E4%B8%80%E4%B8%89%E4%B8%8A%E4%B8%8B%E4%B8%8D%E4%B8%96%E4%B8%A6%E4%B8%AD%E4%B8%B8%E4%B8%BB%E4%BA%88%E4%BA%8B%E4%BA%BA%E4%BB%8A%E4%BB%95%E4%BB%98%E4%BB%A5%E4%BB%B2%E4%BB%B6%E4%BC%8A%E4%BC%91%E4%BC%9A%E4%BD%8F%E4%BD%93%E4%BD%95%E4%BD%9C%E4%BD%BF%E4%BE%8B%E4%BF%A1%E4%BF%AE%E4%BF%B3%E5%80%8B%E5%81%A5%E5%81%B4%E5%83%8F%E5%84%84%E5%84%AA%E5%85%83%E5%85%88%E5%85%A5%E5%85%A8%E5%85%AC%E5%85%B1%E5%85%B7%E5%86%85%E5%86%86%E5%86%AC%E5%87%BA%E5%88%86%E5%88%87%E5%88%9D%E5%88%A5%E5%89%8D%E5%8A%9B%E5%8A%A0%E5%8A%B9%E5%8B%89%E5%8B%95%E5%8B%A4%E5%8C%BA%E5%8C%BB%E5%8D%8A%E5%8D%94%E5%8D%B0%E5%8D%B5%E5%8E%BB%E5%8F%82%E5%8F%8B%E5%8F%8E%E5%8F%96%E5%8F%97%E5%8F%A3%E5%8F%AB%E5%8F%B0%E5%8F%B7%E5%8F%B8%E5%90%84%E5%90%88%E5%90%8C%E5%90%8D%E5%90%9B%E5%91%82%E5%91%8A%E5%91%B3%E5%92%8C%E5%93%81%E5%93%A1%E5%95%86%E5%95%8F%E5%96%B6%E5%9B%9E%E5%9B%A3%E5%9B%B0%E5%9B%B3%E5%9B%BA%E5%9B%BD%E5%9C%92%E5%9E%8B%E5%9F%BA%E5%A0%B1%E5%A0%B4%E5%A1%A9%E5%A2%97%E5%A3%AB%E5%A3%B0%E5%A3%B2%E5%A4%89%E5%A4%8F%E5%A4%95%E5%A4%96%E5%A4%9A%E5%A4%9C%E5%A4%A2%E5%A4%A7%E5%A4%A9%E5%A4%AA%E5%A5%BD%E5%A7%8B%E5%AB%8C%E5%AD%90%E5%AD%97%E5%AD%A3%E5%AD%A6%E5%AE%87%E5%AE%99%E5%AE%9A%E5%AE%9F%E5%AE%B6%E5%AE%BF%E5%AF%84%E5%AF%8C%E5%AF%9D%E5%AF%BE%E5%AF%BF%E5%B0%8F%E5%B0%91%E5%B0%BE%E5%B1%8A%E5%B1%8B%E5%B1%B1%E5%B3%B6%E5%B7%AE%E5%B7%BB%E5%B7%BE%E5%B8%83%E5%B8%AD%E5%B8%AF%E5%B8%B0%E5%B9%85%E5%B9%B3%E5%B9%B4%E5%BA%83%E5%BA%97%E5%BA%A6%E5%BA%B7%E5%BC%8F%E5%BC%95%E5%BC%B5%E5%BC%B7%E5%BC%BE%E5%BD%93%E5%BD%A2%E5%BD%B9%E5%BE%85%E5%BE%8C%E5%BE%97%E5%BF%83%E5%BF%85%E5%BF%8D%E5%BF%98%E6%80%92%E6%80%9D%E6%80%A7%E6%81%8B%E6%83%85%E6%83%B3%E6%84%8F%E6%84%9B%E6%86%A9%E6%88%A6%E6%89%80%E6%89%8B%E6%89%B1%E6%8A%9C%E6%8A%9E%E6%8A%B9%E6%8A%BC%E6%8C%81%E6%8E%83%E6%8E%A2%E6%8F%9A%E6%93%8D%E6%94%AF%E6%95%A3%E6%95%B0%E6%96%87%E6%96%89%E6%96%99%E6%96%B0%E6%96%B9%E6%97%85%E6%97%8F%E6%97%A5%E6%97%A9%E6%98%86%E6%98%8E%E6%98%A0%E6%98%A5%E6%98%BC%E6%99%82%E6%99%A9%E6%99%AE%E6%99%B4%E6%9A%97%E6%9A%AE%E6%9B%B2%E6%9B%B8%E6%9B%BF%E6%9C%80%E6%9C%88%E6%9C%89%E6%9C%9D%E6%9C%AA%E6%9C%AB%E6%9C%AC%E6%9D%A5%E6%9E%9A%E6%9E%9C%E6%9E%A0%E6%A0%97%E6%A0%A1%E6%A0%B9%E6%A2%85%E6%A5%AD%E6%A5%BD%E6%A7%98%E6%A8%99%E6%A8%AA%E6%AC%A1%E6%AD%8C%E6%AD%A2%E6%AD%A3%E6%B0%8F%E6%B0%97%E6%B0%B4%E6%B1%BA%E6%B2%A1%E6%B3%81%E6%B3%89%E6%B4%8B%E6%B4%97%E6%B4%BE%E6%B5%B7%E6%B6%88%E6%B7%B1%E6%B8%88%E6%B8%9B%E6%B8%A9%E6%BA%96%E6%BC%94%E6%BC%A2%E7%82%AD%E7%82%B9%E7%84%A1%E7%84%BC%E7%85%AE%E7%86%9F%E7%89%87%E7%89%A9%E7%89%B9%E7%8A%AC%E7%8C%AB%E7%8E%89%E7%90%86%E7%94%98%E7%94%9F%E7%94%A8%E7%94%B1%E7%94%BB%E7%95%8C%E7%95%AA%E7%99%BA%E7%99%BB%E7%99%BD%E7%9B%9B%E7%9B%AE%E7%9B%B4%E7%9B%B8%E7%9D%80%E7%9E%AC%E7%9F%A5%E7%9F%AD%E7%A0%94%E7%A0%A6%E7%A2%BA%E7%A4%BA%E7%A5%AD%E7%A6%8F%E7%A7%8B%E7%A7%BB%E7%A8%AE%E7%A9%B4%E7%A9%BA%E7%AB%8B%E7%AB%AF%E7%AC%91%E7%AC%AC%E7%AD%86%E7%AD%94%E7%AF%80%E7%B3%BB%E7%B4%85%E7%B4%9A%E7%B4%AB%E7%B5%82%E7%B5%84%E7%B5%8C%E7%B5%90%E7%B5%B1%E7%B5%B6%E7%B6%9A%E7%B7%8A%E7%B7%91%E7%B7%92%E7%B8%AE%E7%BD%AE%E7%BF%92%E8%80%83%E8%80%85%E8%81%9E%E8%81%B4%E8%82%89%E8%82%B2%E8%83%BD%E8%87%AA%E8%87%B4%E8%88%9E%E8%89%B2%E8%8A%B1%E8%8A%B8%E8%8B%A6%E8%8B%B1%E8%8C%B6%E8%8F%93%E8%90%BD%E8%91%89%E8%A1%8C%E8%A1%97%E8%A1%A8%E8%A6%81%E8%A6%8B%E8%A6%9A%E8%A6%A7%E8%A7%92%E8%A7%A6%E8%A8%80%E8%A8%88%E8%A8%98%E8%A8%AD%E8%A9%A3%E8%A9%A6%E8%A9%B1%E8%AA%8C%E8%AA%8D%E8%AA%95%E8%AA%AC%E8%AA%AD%E8%AA%BF%E8%AB%87%E8%B1%86%E8%B2%A0%E8%B2%AF%E8%B2%B7%E8%B2%BC%E8%B3%AA%E8%B5%A4%E8%B5%B7%E8%B6%85%E8%B6%8A%E8%B6%A3%E8%B6%B3%E8%BA%AB%E8%BE%9B%E8%BE%BC%E8%BF%91%E8%BF%94%E8%BF%B7%E8%BF%BD%E9%80%81%E9%80%8F%E9%80%94%E9%80%9A%E9%80%9F%E9%80%B2%E9%81%85%E9%81%8A%E9%81%8B%E9%81%8E%E9%81%93%E9%81%94%E9%81%95%E9%81%A0%E9%81%B8%E9%83%A8%E9%85%8D%E9%85%92%E9%85%B8%E9%87%8D%E9%87%91%E9%8C%B2%E9%8D%8B%E9%95%B7%E9%96%8B%E9%96%93%E9%99%90%E9%99%A4%E9%9A%A0%E9%9B%91%E9%9B%A2%E9%9B%A8%E9%9B%AA%E9%9D%92%E9%9D%99%E9%9D%A2%E9%9F%B3%E9%A0%86%E9%A0%AD%E9%A1%8C%E9%A1%94%E9%A2%A8%E9%A3%9B%E9%A3%9F%E9%A3%B2%E9%A3%BC%E9%A4%90%E9%A8%93%E9%A9%9A%E9%AD%9A%E9%AE%AD%E9%B3%A5%E9%B7%B9%E9%BB%84%E9%BB%92%E9%BB%99%EF%BC%81%EF%BC%88%EF%BC%89%EF%BC%8B%EF%BC%8D%EF%BC%8F%EF%BC%9A%EF%BC%9D%EF%BC%9F%EF%BD%9C" rel="stylesheet">
+<!-- k-fonts:end -->
+<!-- 共通部品 D4（kkp-kit を kit/ にコピーしたもの。中は手で直さず kkp-kit 側で直して sync.sh） -->
+<link rel="stylesheet" href="/kit/kit.css">
+<script src="/kit/kit.js" defer></script>
+<script src="/js/odai.js"></script>
+<style>
+/* ---- このサイトだけの並べ方（k- 以外の名前） ---- */
+body{margin:0;background:var(--k-surface)}
+.ky-wrap{max-width:720px;margin:0 auto;padding:0 16px}
+.ky-top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:2px solid var(--k-sumi)}
+.ky-top a{color:var(--k-sumi);text-decoration:none;font-family:var(--k-bold);font-size:16px;letter-spacing:.06em}
+.ky-top small{font-size:12px;color:var(--k-text-2)}
+h1.ky-h1{margin:24px 0 8px;font-family:var(--k-brush);font-weight:400;font-size:30px;letter-spacing:.12em;line-height:1.25}
+.ky-lead{margin:0 0 16px;font-size:15px;line-height:1.7;color:var(--k-text-2)}
+.ky-sec{margin:24px 0}
+.ky-sec>h2{margin:0 0 12px;font-size:17px;line-height:1.4}
+.ky-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.ky-names{display:grid;grid-template-columns:1fr;gap:8px;margin-top:12px}
+.ky-name{display:flex;align-items:center;gap:8px}
+.ky-name>span{flex:0 0 3.2em;font-size:13px;font-weight:700;color:var(--k-text-2)}
+.ky-name input{flex:1;min-width:0;height:44px;box-sizing:border-box;padding:0 12px;border:2px solid var(--k-sumi);border-radius:var(--k-r);background:#fff;font:inherit;font-size:16px}
+.ky-name .k-seg{flex:0 0 auto}
+.ky-name .k-seg>button{min-height:44px;padding:4px 10px;font-size:13px}
+.ky-note{margin:8px 0 0;font-size:13px;line-height:1.6;color:var(--k-text-2)}
+.ky-start{margin:24px 0 8px}
+.ky-start .k-btn-main{width:100%}
+.ky-packs .k-seg>button{flex-basis:33.34%}
+.ky-stream{margin:24px 0;padding:12px 0;border-top:2px solid var(--k-sumi);border-bottom:1px solid var(--k-line-soft)}
+.ky-stream h2{margin:0 0 4px;font-size:16px}
+.ky-stream a{color:var(--k-sumi);font-weight:700}
+
+/* ---- 遊んでいる画面 ---- */
+.ky-prog{display:flex;align-items:center;gap:12px;margin:16px 0 8px;font-family:var(--k-bold);font-size:15px}
+.ky-prog .k-bar{flex:1}
+.ky-prog b{color:var(--k-shu)}
+.ky-q{margin:8px 0 16px;padding:16px 0 12px;border-top:3px solid var(--k-sumi);border-bottom:1px solid var(--k-line-soft)}
+.ky-q small{display:block;font-size:13px;font-weight:700;color:var(--k-text-2)}
+.ky-q p{margin:4px 0 0;font-family:var(--k-bold);font-size:24px;line-height:1.35;letter-spacing:.04em;word-break:auto-phrase}
+.ky-turn{margin:0 0 8px;font-size:16px;font-weight:700}
+.ky-turn b{color:var(--k-shu)}
+.ky-choices{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.ky-choices button{min-height:56px;padding:8px 12px;border:2px solid var(--k-sumi);border-radius:var(--k-r);background:#fff;color:var(--k-sumi);font-family:var(--k-body);font-size:17px;font-weight:700;line-height:1.3;cursor:pointer;box-shadow:var(--k-sh-s);word-break:auto-phrase}
+.ky-choices button:active{transform:translate(3px,3px);box-shadow:none}
+.ky-choices button[aria-pressed="true"]{background:var(--k-shu);color:#fff}
+.ky-free{display:flex;gap:8px}
+.ky-free input{flex:1;min-width:0;height:56px;box-sizing:border-box;padding:0 12px;border:2px solid var(--k-sumi);border-radius:var(--k-r);font:inherit;font-size:18px}
+.ky-cover{padding:24px 0;border-top:1px solid var(--k-line-soft);border-bottom:1px solid var(--k-line-soft)}
+.ky-cover p{margin:0 0 16px;font-size:18px;font-weight:700;line-height:1.5}
+.ky-cover p b{color:var(--k-shu);font-size:24px}
+.ky-cover .k-btn-main{width:100%}
+.ky-status{margin:16px 0 0;padding:0;list-style:none;border-top:1px solid var(--k-line-soft)}
+.ky-status li{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:44px;border-bottom:1px solid var(--k-line-soft);font-size:15px}
+.ky-status li i{font-style:normal;font-size:13px;color:var(--k-text-2)}
+.ky-status li.done i{color:var(--k-shu);font-weight:700}
+.ky-acts{display:flex;gap:12px;flex-wrap:wrap;margin:16px 0}
+.ky-acts .k-btn{flex:1 1 200px}
+
+/* オープン */
+.ky-open{margin:0;padding:0;list-style:none;border-top:1px solid var(--k-line-soft)}
+.ky-open>li{padding:10px 0;border-bottom:1px solid var(--k-line-soft)}
+.ky-open .nm{display:block;font-size:13px;font-weight:700;color:var(--k-text-2)}
+.ky-open .an{display:block;font-family:var(--k-bold);font-size:22px;line-height:1.3}
+.ky-open li.hit .an{color:var(--k-shu)}
+.ky-open li.hit .an::after{content:"同じ";display:inline-block;margin-left:8px;padding:1px 8px;border:2px solid var(--k-shu);border-radius:4px;font-family:var(--k-body);font-size:13px;font-weight:700;vertical-align:4px}
+.ky-open .set{margin-top:6px}
+.ky-open .set .k-seg>button{min-height:40px;padding:4px 8px;font-size:14px}
+.ky-pick{display:inline-flex;align-items:center;gap:6px;margin:6px 6px 0 0;min-height:40px;padding:0 12px;border:2px solid var(--k-sumi);border-radius:var(--k-r);background:#fff;font:inherit;font-size:14px;font-weight:700;cursor:pointer}
+.ky-pick[aria-pressed="true"]{background:var(--k-sumi);color:#fff}
+.ky-verdict{display:flex;align-items:center;gap:16px;margin:16px 0 0;min-height:72px}
+.ky-verdict .k-stamp{width:76px;height:76px;font-size:20px;line-height:1.05;text-align:center}
+.ky-verdict p{margin:0;font-size:17px;font-weight:700;line-height:1.5}
+.ky-verdict.miss p{color:var(--k-text-2)}
+.ky-grpbar{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 0}
+
+/* 回答コード（進行役） */
+.ky-host{margin:16px 0 0;border-top:2px solid var(--k-sumi)}
+.ky-host>summary{min-height:44px;display:flex;align-items:center;cursor:pointer;font-weight:700;font-size:14px;list-style:none}
+.ky-host>summary::before{content:"＋";margin-right:8px;font-family:var(--k-bold)}
+.ky-host[open]>summary::before{content:"－"}
+.ky-host .in{padding:0 0 12px}
+.ky-ac{display:flex;gap:8px}
+.ky-ac textarea{flex:1;min-width:0;height:44px;box-sizing:border-box;padding:10px 12px;border:2px solid var(--k-sumi);border-radius:var(--k-r);font:inherit;font-size:15px;resize:none}
+.ky-msg{min-height:1.5em;margin:6px 0 0;font-size:13px;font-weight:700}
+.ky-msg.ng{color:var(--k-shu)}
+.ky-qr{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.ky-qr svg{display:block;background:#fff}
+
+/* 結果 */
+.ky-res .k-result{margin:16px 0}
+.ky-res .k-result b{font-size:34px}
+.ky-res h2{margin:24px 0 8px;font-size:17px}
+.ky-res .k-table-result td,.ky-res .k-table-result th{font-size:15px}
+.ky-miss{margin:0;padding:0;list-style:none}
+.ky-miss li{padding:8px 0;border-bottom:1px solid var(--k-line-soft);font-size:14px;line-height:1.6}
+.ky-miss li b{display:block;font-size:15px}
+.ky-ad{margin:32px 0 8px}
+
+/* 回答画面（ゲストのスマホ） */
+.ky-code{margin:16px 0 0;padding:12px 0;border-top:3px solid var(--k-sumi);border-bottom:1px solid var(--k-line-soft)}
+.ky-code .cd{display:block;font-family:var(--k-bold);font-size:30px;letter-spacing:.1em;font-variant-numeric:tabular-nums}
+.ky-code .uk{font-size:14px;font-weight:700}
+.ky-big{margin:16px 0;padding:24px 12px;border:3px solid var(--k-sumi);border-radius:var(--k-r);background:#fff;text-align:center}
+.ky-big small{display:block;font-size:13px;font-weight:700;color:var(--k-text-2)}
+.ky-big b{display:block;font-family:var(--k-bold);font-size:40px;line-height:1.25;color:var(--k-shu);word-break:auto-phrase}
+.ky-qnav{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:12px 0}
+.ky-qnav .k-btn{min-width:96px}
+
+/* 読みもの */
+.ky-about{margin:40px 0 0}
+.ky-about p,.ky-about li{font-size:15px;line-height:1.7}
+.ky-ex{margin:0;padding:0;list-style:none}
+.ky-ex li{padding:6px 0;border-bottom:1px solid var(--k-line-soft)}
+.ky-ex li small{color:var(--k-text-2)}
+
+[hidden]{display:none!important}
+
+@media (min-width:768px){
+  .ky-names{grid-template-columns:1fr 1fr}
+  .ky-choices{grid-template-columns:repeat(3,1fr)}
+  h1.ky-h1{font-size:36px}
+}
+/* スマホは主ボタンを下に固定 */
+@media (max-width:767px){
+  .ky-start.k-fix{margin:24px -16px 0}
+}
+
+/* ---- 配信モード（PC）：操作画面も1画面に収める。幅1200で組んで --z で縮める ---- */
+body.stream .ky-about,body.stream .ky-adwrap{display:none!important}
+body.stream .ky-names{grid-template-columns:1fr}
+body.stream.in-game #app{width:1200px;max-width:none;zoom:var(--z,1);margin:0 auto}
+body.stream.in-game .ky-top{display:none}
+body.stream.in-game .ky-playgrid{display:grid;grid-template-columns:1.25fr 1fr;gap:24px;align-items:start}
+body.stream.in-game .ky-q p{font-size:30px}
+body.stream.in-game .ky-choices{grid-template-columns:1fr 1fr}
+</style>
+</head>
+<body class="k-page">
+<div class="ky-wrap" id="app">
+  <header class="ky-top"><a href="/">共通点探しゲーム</a><small id="modeTag">登録不要・無料</small></header>
+
+  <!-- ===== 設定 ===== -->
+  <section id="setup">
+    <h1 class="ky-h1">共通点探しゲーム</h1>
+    <p class="ky-lead">お題に答えを選んで、せーので見せ合う。同じ答えは自動で数えて、最後に「共通点◯個」を出します。2〜6人。</p>
+
+    <div class="ky-sec">
+      <h2><span class="k-step">STEP 1</span>人数と名前</h2>
+      <div class="k-stepper"><button type="button" id="nMinus" aria-label="減らす">−</button><output class="k-num" id="nOut">2</output><span>人</span><button type="button" id="nPlus" aria-label="増やす">＋</button></div>
+      <div class="ky-names" id="names"></div>
+      <p class="ky-note">名前はこの端末の中だけに置きます。どこにも送りません。</p>
+    </div>
+
+    <div class="ky-sec" id="howSec">
+      <h2><span class="k-step">STEP 2</span>答え方</h2>
+      <div class="k-seg k-seg-2" role="group" id="howSeg">
+        <button type="button" data-how="pass" aria-pressed="true">スマホ1台を回す<small>一致を自動で数える</small></button>
+        <button type="button" data-how="each" aria-pressed="false">各自のスマホで<small>せーので画面を見せる</small></button>
+      </div>
+    </div>
+
+    <div class="ky-sec ky-packs">
+      <h2><span class="k-step">STEP 3</span>お題</h2>
+      <div class="k-seg" role="group" id="packSeg"></div>
+      <div class="ky-row" style="margin-top:12px">
+        <span style="font-size:14px;font-weight:700">問題の数</span>
+        <div class="k-seg k-seg-3" role="group" id="cntSeg" style="flex:1;max-width:320px">
+          <button type="button" data-n="5" aria-pressed="true">5問</button>
+          <button type="button" data-n="10" aria-pressed="false">10問</button>
+          <button type="button" data-n="15" aria-pressed="false">15問</button>
+        </div>
+      </div>
+      <label class="ky-note" style="display:flex;align-items:center;gap:8px"><input type="checkbox" id="freeOn" checked> 自由に答えるお題も入れる（一致は「同じ！」を押して決める）</label>
+    </div>
+
+    <!-- 配信モード（PC幅768以上だけ表示） -->
+    <div class="ky-stream" id="streamBox" hidden>
+      <h2>配信で使う</h2>
+      <p class="ky-note" id="streamOff">配信モードにすると広告が消え、OBS用の表示ページ（/view/）に今の場面が出ます。離れたゲストは「回答コード」で答えを送れます。<br><button type="button" class="k-btn k-btn-sub" id="streamGo" style="margin-top:8px">配信モードにする</button></p>
+      <p class="ky-note" id="streamOn" hidden>配信モード中（広告なし）。OBSではウィンドウキャプチャで <a href="/view/" target="kyView" id="viewLink">表示ページ（/view/）</a> を取り込みます。同じブラウザで開いてください。名前の横で「この部屋」か「離れている」を選びます。<br><a href="/?mode=normal">配信モードをやめる</a></p>
+    </div>
+
+    <div class="ky-start k-fix"><button type="button" class="k-btn k-btn-main" id="startBtn">はじめる</button></div>
+  </section>
+
+  <!-- ===== 遊んでいる画面 ===== -->
+  <section id="play" hidden>
+    <div class="ky-prog"><span id="progT">第1問 / 5</span><div class="k-bar"><i id="progBar" style="width:0%"></i></div><span>共通点 <b class="k-num" id="progHit">0</b></span></div>
+    <div class="ky-playgrid">
+      <div>
+        <div class="ky-q"><small id="qPack">初対面</small><p id="qText">お題</p></div>
+        <div id="answerArea"></div>
+        <div id="openArea" hidden></div>
+      </div>
+      <div id="sideArea">
+        <ul class="ky-status" id="statusList"></ul>
+        <details class="ky-host" id="joinBox" hidden><summary id="joinSum">みんなのスマホで開く（QR）</summary><div class="in">
+          <div class="ky-qr"><div id="qrBox"></div><div><p class="ky-note" id="joinNote" style="margin-top:0">QRを読むと、自分の名前を選んで答える画面が開きます。</p><button type="button" class="k-btn k-btn-sm" id="joinCopy">参加リンクをコピー</button></div></div>
+        </div></details>
+        <details class="ky-host" id="acBox" hidden open><summary>回答コードを貼る（進行役だけ）</summary><div class="in">
+          <div class="ky-ac"><textarea id="acIn" rows="1" placeholder="ここに貼る" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" aria-label="回答コードを貼る"></textarea><button type="button" class="k-btn k-btn-sm" id="acGo">受け取る</button></div>
+          <p class="ky-msg" id="acMsg" role="status"></p>
+        </div></details>
+        <div class="ky-acts" id="playActs"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 結果 ===== -->
+  <section id="result" class="ky-res" hidden>
+    <div id="resBody"></div>
+    <div class="ky-acts">
+      <button type="button" class="k-btn k-btn-main" id="againBtn">同じメンバーでもう1回</button>
+      <button type="button" class="k-btn k-btn-sub" id="backBtn">メンバー・お題を変える</button>
+    </div>
+    <div class="ky-adwrap ky-ad" id="adWrap" hidden>
+      <div class="kkp-ad"><div class="kkp-ad-label">スポンサーリンク</div><ins class="adsbygoogle" style="display:inline-block" data-ad-client="ca-pub-1298304917726270" data-ad-slot=""></ins></div>
+    </div>
+  </section>
+
+  <!-- ===== 回答画面（参加リンク ?p= を開いた人のスマホ） ===== -->
+  <section id="guest" hidden>
+    <h1 class="ky-h1" style="font-size:24px">共通点探し 回答画面</h1>
+    <div id="gWho"></div>
+    <div id="gPlay" hidden>
+      <div class="ky-qnav"><button type="button" class="k-btn k-btn-sub" id="gPrev">前へ</button><span class="k-num" id="gPos" style="font-family:var(--k-bold)">第1問 / 5</span><button type="button" class="k-btn k-btn-sub" id="gNext">次へ</button></div>
+      <div class="ky-q"><small id="gName"></small><p id="gQ"></p></div>
+      <div id="gAns"></div>
+      <div id="gOut"></div>
+      <p class="ky-note" id="gHint"></p>
+    </div>
+  </section>
+
+  <!-- ===== 読みもの（ふだんのモードだけ） ===== -->
+  <article class="ky-about" id="about">
+    <h2 class="k-h2">共通点探しゲームの遊び方</h2>
+    <ol class="k-steps">
+      <li><b>お題が出る</b>「好きな季節は？」のように、選ぶ答えが4〜6個ついています。</li>
+      <li><b>自分だけ答える</b>スマホ1台なら順番に回して、ほかの人は画面を見ないようにします。</li>
+      <li><b>せーのでオープン</b>全員の答えが一度に出ます。同じ答えの人がいれば「共通点」のハンコ。</li>
+      <li><b>最後にまとめ</b>2人なら「共通点◯個」と同じだった答えの一覧、3人以上ならペアごとの数が出ます。</li>
+    </ol>
+    <p>話して共通点を見つけるやり方（研修でよくある形）と違い、選ぶ答えがあるので、口数が少ない人や初対面どうしでも始めやすく、ズレた答えも笑いどころになります。</p>
+
+    <h2 class="k-h2">お題の例</h2>
+    <ul class="ky-ex" id="exList"></ul>
+
+    <h2 class="k-h2">よくある質問</h2>
+    <details class="k-fold"><summary>何人で遊べますか？</summary><div><p>2〜6人です。2人なら相性のような1枚、3人以上ならペアごとの共通点の数が出ます。</p></div></details>
+    <details class="k-fold"><summary>小学生でも遊べますか？</summary><div><p>「小学生」のお題は、ひらがな多めの短い言葉にしています。学級レクや家族でも使えます。</p></div></details>
+    <details class="k-fold"><summary>配信のコラボで使えますか？</summary><div><p>パソコンで「配信モード」にすると広告が消え、OBSに取り込む表示ページ（/view/）に、お題と答えと共通点の数が大きく出ます。離れたゲストは参加リンクから答えを選び、出てきた「回答コード」をDiscordなどで配信者に送ります。</p></div></details>
+    <details class="k-fold"><summary>答えや名前はどこかに送られますか？</summary><div><p>送りません。名前と答えはこの端末の中だけで扱います。回答コードは、ゲスト本人が自分でコピーして送るものです。</p></div></details>
+    <details class="k-fold"><summary>聞かれたくないお題が出たら？</summary><div><p>答えずに「とばす」を選べます。住所や学校名など、個人のことを聞くお題は入れていません。</p></div></details>
+  </article>
+</div>
+
+<!-- WEBNINJA_UNIFIED_FOOTER -->
+<footer style="text-align:center;padding:2rem 1rem 2.5rem;font-size:0.78rem;color:#94a3b8;line-height:2;border-top:1px solid #f0e6d2;margin-top:2.5rem;background:#fffcf7;" id="uniFoot">
+  <div style="font-weight:800;color:#8b6b3d;font-size:0.85rem;margin-bottom:0.4rem;">web忍者の砦</div>
+  <div>
+    <a href="https://kkpwebninja.com/" target="_blank" rel="noopener" style="color:#8b6b3d;text-decoration:none;margin:0 0.5rem;">本丸トップ</a>·
+    <a href="https://privacypolicy.kkpwebninja.com/" target="_blank" rel="noopener" style="color:#8b6b3d;text-decoration:none;margin:0 0.5rem;">プライバシーポリシー</a>·
+    <a href="https://kkpwebninja.com/otoiawase" target="_blank" rel="noopener" style="color:#8b6b3d;text-decoration:none;margin:0 0.5rem;">お問い合わせ</a>·
+    <a href="https://x.com/kkp_webninja" target="_blank" rel="noopener" style="color:#8b6b3d;text-decoration:none;margin:0 0.5rem;">@kkp_webninja</a>
+  </div>
+  <div style="margin-top:0.5rem;color:#bfa97a;">© 2025-2026 web忍者の砦</div>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+  var $ = function(id){ return document.getElementById(id); };
+  var STREAM = !!window.__kyStream, GUEST = !!window.__kyGuest;
+  var PACKS = window.KY_PACKS, ODAI = window.KY_ODAI, BYID = window.KY_BYID;
+  var PACK_ORDER = ['sho','kid','nak','col','nen','all'];
+  var DEF = ['A','B','C','D','E','F'];
+
+  function lsGet(k, d){ try { var v = JSON.parse(localStorage.getItem(k) || 'null'); return v == null ? d : v; } catch (e) { return d; } }
+  function lsSet(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+  function ssGet(k, d){ try { var v = JSON.parse(sessionStorage.getItem(k) || 'null'); return v == null ? d : v; } catch (e) { return d; } }
+  function ssSet(k, v){ try { sessionStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+  function esc(t){ return String(t == null ? '' : t).replace(/[&<>"']/g, function(c){ return { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]; }); }
+  function san(n){ n = String(n || ''); return /(さん|様|くん|君|ちゃん|氏)$/.test(n) ? n : n + 'さん'; }
+  function b64e(o){ return btoa(unescape(encodeURIComponent(JSON.stringify(o)))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,''); }
+  function b64d(v){ try { v = String(v).replace(/-/g,'+').replace(/_/g,'/'); while (v.length % 4) v += '='; return JSON.parse(decodeURIComponent(escape(atob(v)))); } catch (e) { return null; } }
+  function toast(t){ if (window.KKit && KKit.toast) KKit.toast(t); }
+  function track(n, p){ try { if (!window.__kkpTest && window.gtag) gtag('event', n, p || {}); } catch (e) {} }
+  function copyText(t, msg){
+    var ok = function(){ toast(msg); };
+    var fb = function(){ var ta = document.createElement('textarea'); ta.value = t; ta.style.position = 'fixed'; ta.style.opacity = '0'; document.body.appendChild(ta); ta.select(); var r = false; try { r = document.execCommand('copy'); } catch (e) {} ta.remove(); if (r) ok(); else window.prompt('これをコピーしてください', t); };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t).then(ok, fb); else fb();
+  }
+  function norm(t){ return String(t || '').replace(/[\s　、。・!！?？ー〜~]/g, '').replace(/[ァ-ン]/g, function(c){ return String.fromCharCode(c.charCodeAt(0) - 0x60); }).toLowerCase(); }
+
+  // ===== 回答コード（ワードウルフ ninja-wordwolf/index.html と同じ作り。頭の2文字だけ KY） =====
+  // 種 seed = ゲームID g + ':' + 回 r + ':' + 問題番号 qi（問題ごとに別のコード。前の問題のコードはチェックで弾く）
+  // 中身 V = (名前の印 10bit << 7) | (席 * 11 + 答え)   答え 0〜9＝選ぶ答えの番号／10＝とばす
+  // E = (V * 4099 + K) mod 36^4 → 英数字4文字。チェック C = 種＋E から2文字。コード = 'KY' + E(4) + C(2)
+  // 受付記号 = 種と席から決める英字1＋数字1。読みにくくするだけで暗号ではない
+  var AC_M = 1679616, AC_MUL = 4099, AC_INV = 819115, AC_HEAD = 'KY', AC_RE = /KY[0-9A-Z]{6}/g;
+  function fnv(s){ s = String(s); var h = 0x811c9dc5; for (var i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 0x01000193) >>> 0; } return h >>> 0; }
+  function b36(n, len){ var t = n.toString(36).toUpperCase(); while (t.length < len) t = '0' + t; return t; }
+  function acSeed(g, r, qi){ return String(g) + ':' + r + ':' + qi; }
+  function acUke(seed, n){
+    var L = 'ABCDEFGHJKLMNPQRSTUVWXYZ', used = {}, out = [];
+    for (var i = 0; i < n; i++) {
+      var h = fnv(seed + '|u|' + i), u = '';
+      for (var t = 0; t < 60; t++) { u = L.charAt(h % 24) + (1 + ((h >>> 8) % 9)); if (!used[u]) break; h = fnv(h + '+'); }
+      used[u] = 1; out.push(u);
+    }
+    return out;
+  }
+  function acEncode(seed, names, seat, ans){
+    var V = ((fnv(seed + '|n|' + names[seat]) & 1023) << 7) | (seat * 11 + (ans < 0 ? 10 : ans));
+    var E = (V * AC_MUL + fnv(seed + '|k') % AC_M) % AC_M, es = b36(E, 4);
+    return AC_HEAD + es + b36(fnv(seed + '|c|' + es) % 1296, 2);
+  }
+  function acDecode(seed, names, code, nChoices){
+    code = String(code || '').toUpperCase();
+    if (!/^KY[0-9A-Z]{6}$/.test(code)) return null;
+    var es = code.slice(2, 6);
+    if (b36(fnv(seed + '|c|' + es) % 1296, 2) !== code.slice(6)) return null;
+    var V = ((parseInt(es, 36) - fnv(seed + '|k') % AC_M + AC_M) % AC_M) * AC_INV % AC_M;
+    if (V >= 131072) return null;
+    var P = V & 127, seat = Math.floor(P / 11), a = P % 11;
+    if (seat >= names.length || (a !== 10 && a >= nChoices)) return null;
+    if ((fnv(seed + '|n|' + names[seat]) & 1023) !== (V >>> 7)) return null;
+    return { seat: seat, ans: a === 10 ? -1 : a };
+  }
+
+  // ===== OBS表示ページ（/view/）へ送る（同じブラウザの中だけ。BroadcastChannel＋localStorage） =====
+  var VIEW_CH = null; try { VIEW_CH = new BroadcastChannel('ky-view'); } catch (e) {}
+  function viewSend(st){
+    if (!STREAM) return;
+    st.t = Date.now();
+    try { localStorage.setItem('ky-view-state', JSON.stringify(st)); } catch (e) {}
+    try { if (VIEW_CH) VIEW_CH.postMessage(st); } catch (e) {}
+  }
+
+  // ===== 回答画面（ゲストのスマホ） =====
+  if (GUEST) { runGuest(); return; }
+
+  // ===== 設定 =====
+  var CFG = lsGet('ky-cfg', {});
+  var S = {
+    n: Math.min(6, Math.max(2, CFG.n || 2)),
+    names: Array.isArray(CFG.names) ? CFG.names.slice(0, 6) : [],
+    remote: Array.isArray(CFG.remote) ? CFG.remote.slice(0, 6) : [],
+    how: CFG.how === 'each' ? 'each' : 'pass',
+    pack: PACK_ORDER.indexOf(CFG.pack) >= 0 ? CFG.pack : 'sho',
+    cnt: [5, 10, 15].indexOf(CFG.cnt) >= 0 ? CFG.cnt : 5,
+    free: CFG.free !== false,
+    g: '', r: 0, qs: [], qi: 0, a: [], grp: [], phase: 'answer', turn: 0, cover: true, rv: {}, sel: []
+  };
+  function saveCfg(){ lsSet('ky-cfg', { n: S.n, names: S.names, remote: S.remote, how: S.how, pack: S.pack, cnt: S.cnt, free: S.free }); }
+  function nm(i){ var t = String(S.names[i] || '').trim(); return t || DEF[i]; }
+  function names(){ var a = []; for (var i = 0; i < S.n; i++) a.push(nm(i)); return a; }
+  function isRemote(i){ if (STREAM) return i > 0 && S.remote[i] !== false; return S.how === 'each' && i > 0; }
+  function localSeats(){ var a = []; for (var i = 0; i < S.n; i++) if (!isRemote(i)) a.push(i); return a; }
+  function hasRemote(){ for (var i = 1; i < S.n; i++) if (isRemote(i)) return true; return false; }
+
+  if (STREAM) {
+    document.body.classList.add('stream');
+    $('modeTag').textContent = '配信モード（広告なし）';
+    $('howSec').hidden = true;
+    var st3 = document.querySelector('.ky-packs .k-step'); if (st3) st3.textContent = 'STEP 2';
+  }
+  if (window.matchMedia && window.matchMedia('(min-width:768px)').matches) $('streamBox').hidden = false;
+  $('streamOff').hidden = STREAM; $('streamOn').hidden = !STREAM;
+  $('streamGo').addEventListener('click', function(){ location.href = '/?mode=stream'; });
+
+  function renderNames(){
+    var box = $('names'); box.innerHTML = '';
+    $('nOut').textContent = S.n;
+    for (var i = 0; i < S.n; i++) (function(i){
+      var row = document.createElement('div'); row.className = 'ky-name';
+      var lab = i === 0 ? (STREAM ? '配信者' : (S.how === 'each' ? '進行役' : '1人目')) : (i + 1) + '人目';
+      row.innerHTML = '<span>' + lab + '</span><input type="text" maxlength="10" enterkeyhint="next" autocomplete="off" placeholder="' + DEF[i] + '" aria-label="' + lab + 'の名前">';
+      var inp = row.querySelector('input'); inp.value = S.names[i] || '';
+      inp.addEventListener('input', function(){ S.names[i] = inp.value.slice(0, 10); saveCfg(); });
+      if (STREAM && i > 0) {
+        var seg = document.createElement('div'); seg.className = 'k-seg'; seg.setAttribute('role', 'group');
+        seg.innerHTML = '<button type="button" data-r="0">この部屋</button><button type="button" data-r="1">離れている</button>';
+        var paint = function(){ [].forEach.call(seg.children, function(b){ b.setAttribute('aria-pressed', String((b.dataset.r === '1') === isRemote(i))); }); };
+        seg.addEventListener('click', function(e){ var b = e.target.closest('button'); if (!b) return; S.remote[i] = b.dataset.r === '1'; saveCfg(); paint(); });
+        paint(); row.appendChild(seg);
+      }
+      box.appendChild(row);
+    })(i);
+  }
+  $('nMinus').addEventListener('click', function(){ if (S.n > 2) { S.n--; saveCfg(); renderNames(); } });
+  $('nPlus').addEventListener('click', function(){ if (S.n < 6) { S.n++; saveCfg(); renderNames(); } });
+  function segBind(id, attr, get, set){
+    var seg = $(id);
+    var paint = function(){ [].forEach.call(seg.children, function(b){ b.setAttribute('aria-pressed', String(b.dataset[attr] === String(get()))); }); };
+    seg.addEventListener('click', function(e){ var b = e.target.closest('button'); if (!b) return; set(b.dataset[attr]); saveCfg(); paint(); renderNames(); });
+    paint();
+  }
+  (function(){
+    var seg = $('packSeg'), h = '';
+    PACK_ORDER.forEach(function(p){
+      var n = p === 'all' ? ODAI.filter(function(o){ return o.p !== 'kid'; }).length : ODAI.filter(function(o){ return o.p === p; }).length;
+      h += '<button type="button" data-pack="' + p + '">' + (p === 'all' ? 'まぜる（小学生以外）' : PACKS[p]) + '<small>' + n + '問</small></button>';
+    });
+    seg.innerHTML = h;
+  })();
+  segBind('packSeg', 'pack', function(){ return S.pack; }, function(v){ S.pack = v; });
+  segBind('cntSeg', 'n', function(){ return S.cnt; }, function(v){ S.cnt = +v; });
+  segBind('howSeg', 'how', function(){ return S.how; }, function(v){ S.how = v; });
+  $('freeOn').checked = S.free;
+  $('freeOn').addEventListener('change', function(){ S.free = $('freeOn').checked; saveCfg(); });
+  renderNames();
+
+  // お題の例（読みもの）
+  (function(){
+    var h = '';
+    ['sho','kid','nak','col','nen'].forEach(function(p){
+      ODAI.filter(function(o){ return o.p === p && o.c; }).slice(0, 2).forEach(function(o){
+        h += '<li>' + esc(o.q) + ' <small>（' + PACKS[p] + '）' + esc(o.c.join('／')) + '</small></li>';
+      });
+    });
+    $('exList').innerHTML = h;
+  })();
+  if (STREAM) $('about').hidden = true;
+
+  // ===== お題を選ぶ（最近出たものは後回し） =====
+  function pickQs(){
+    var pool = ODAI.filter(function(o){ return (S.pack === 'all' ? o.p !== 'kid' : o.p === S.pack) && (S.free || o.c); });
+    var recent = lsGet('ky-recent', []); if (!Array.isArray(recent)) recent = [];
+    var shuffle = function(a){ for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t; } return a; };
+    var fresh = shuffle(pool.filter(function(o){ return recent.indexOf(o.id) < 0; })), old = shuffle(pool.filter(function(o){ return recent.indexOf(o.id) >= 0; }));
+    var ordered = fresh.concat(old), out = [], freeMax = Math.max(1, Math.floor(S.cnt / 5));
+    ordered.forEach(function(o){ if (out.length >= S.cnt) return; if (!o.c && out.filter(function(x){ return !x.c; }).length >= freeMax) return; out.push(o); });
+    ordered.forEach(function(o){ if (out.length < S.cnt && out.indexOf(o) < 0) out.push(o); });
+    // 自由に答えるお題は1問目に来ないように
+    if (out.length > 1 && !out[0].c) { var k = 1; while (k < out.length && !out[k].c) k++; if (k < out.length) { var t = out[0]; out[0] = out[k]; out[k] = t; } }
+    lsSet('ky-recent', out.map(function(o){ return o.id; }).concat(recent).slice(0, 80));
+    return out.map(function(o){ return o.id; });
+  }
+
+  // ===== ゲーム =====
+  function show(id){ ['setup','play','result'].forEach(function(s){ $(s).hidden = s !== id; }); document.body.classList.toggle('in-game', id !== 'setup'); $('about').hidden = STREAM || id !== 'setup'; window.scrollTo(0, 0); fitSoon(); }
+  function cur(){ return BYID[S.qs[S.qi]]; }
+  function startGame(){
+    var sig = S.n + '|' + names().join('/');
+    if (!S.g || S.gsig !== sig) { S.g = Math.random().toString(36).slice(2, 8); S.gsig = sig; S.r = 0; }
+    S.r++;
+    S.qs = pickQs(); S.qi = 0; S.a = []; S.grp = []; S.rv = {};
+    beginQ();
+    show('play');
+    track('ky_start', { pack: S.pack, n: S.n, mode: STREAM ? 'stream' : S.how });
+  }
+  function beginQ(){
+    S.phase = 'answer'; S.sel = [];
+    S.a[S.qi] = S.a[S.qi] || []; S.grp[S.qi] = S.grp[S.qi] || null;
+    var ls = localSeats(); S.turn = 0; S.cover = !(STREAM && ls.length === 1);
+    // 先に届いていた回答コード（ゲストが先の問題まで答えて送ったもの）を入れる
+    var pre = S.rv[S.qi] || {};
+    Object.keys(pre).forEach(function(k){ if (S.a[S.qi][k] == null) S.a[S.qi][k] = { c: pre[k].a, code: 1 }; });
+    renderPlay();
+  }
+  $('startBtn').addEventListener('click', function(){ saveCfg(); startGame(); });
+  $('againBtn').addEventListener('click', startGame);
+  $('backBtn').addEventListener('click', function(){ show('setup'); renderNames(); viewSend({ step: 'setup', names: names() }); });
+
+  // 同じ答えのまとまり（2人以上のものだけ）
+  function groupsOf(qi){
+    var o = BYID[S.qs[qi]], A = S.a[qi] || [];
+    if (!o.c) return (S.grp[qi] || []).filter(function(g){ return g.length >= 2; });
+    var m = {};
+    for (var i = 0; i < S.n; i++) { var x = A[i]; if (x && typeof x.c === 'number' && x.c >= 0) (m[x.c] = m[x.c] || []).push(i); }
+    return Object.keys(m).map(function(k){ return m[k]; }).filter(function(g){ return g.length >= 2; });
+  }
+  function ansLabel(qi, i){
+    var o = BYID[S.qs[qi]], x = (S.a[qi] || [])[i];
+    if (!x) return null;
+    if (x.skip || x.c === -1) return 'とばす';
+    if (o.c) return o.c[x.c];
+    return x.t ? x.t : '（声で）';
+  }
+  function groupLabel(qi, g){
+    var o = BYID[S.qs[qi]];
+    if (o.c) return ansLabel(qi, g[0]);
+    var t = g.map(function(i){ return (S.a[qi] && S.a[qi][i] && S.a[qi][i].t) || ''; }).filter(Boolean);
+    return t[0] || '同じ答え';
+  }
+  function hitCount(){
+    var c = 0;
+    for (var q = 0; q < S.qs.length; q++) { if (q > S.qi || (q === S.qi && S.phase !== 'open')) break; if (groupsOf(q).length) c++; }
+    return c;
+  }
+  function allLocalDone(){ var A = S.a[S.qi] || []; return localSeats().every(function(i){ return A[i] != null; }); }
+
+  function renderPlay(){
+    var o = cur(), A = S.a[S.qi];
+    $('progT').textContent = '第' + (S.qi + 1) + '問 / ' + S.qs.length;
+    $('progBar').style.width = Math.round(S.qi / S.qs.length * 100) + '%';
+    $('progHit').textContent = hitCount();
+    $('qPack').textContent = PACKS[o.p] + (o.c ? '' : '・自由に答える');
+    $('qText').textContent = o.q;
+    var ar = $('answerArea'), op = $('openArea'), acts = $('playActs');
+    ar.hidden = S.phase !== 'answer'; op.hidden = S.phase !== 'open';
+    acts.innerHTML = '';
+    // 参加リンク・回答コード
+    var rem = hasRemote();
+    $('joinBox').hidden = !rem;
+    if (rem) $('joinSum').textContent = STREAM ? '離れたゲストに送る参加リンク' : 'みんなのスマホで開く（QR）';
+    $('acBox').hidden = !(STREAM && rem);
+    if (S.phase === 'answer') {
+      var ls = localSeats();
+      while (S.turn < ls.length && A[ls[S.turn]] != null) S.turn++;
+      if (S.turn < ls.length) {
+        var who = ls[S.turn];
+        if (S.cover && ls.length > 1) {
+          ar.innerHTML = '<div class="ky-cover"><p>次は <b>' + esc(san(nm(who))) + '</b> の番です。<br>ほかの人は画面を見ないでね。</p><button type="button" class="k-btn k-btn-main" id="coverGo">' + esc(san(nm(who))) + 'が答える</button></div>';
+          $('coverGo').onclick = function(){ S.cover = false; renderPlay(); };
+        } else {
+          ar.innerHTML = '<p class="ky-turn"><b>' + esc(san(nm(who))) + '</b>の答え' + (ls.length > 1 ? '（ほかの人は見ないでね）' : '（配信には映りません）') + '</p>';
+          if (o.c) {
+            var box = document.createElement('div'); box.className = 'ky-choices';
+            o.c.forEach(function(c, k){ var b = document.createElement('button'); b.type = 'button'; b.textContent = c; b.onclick = function(){ answer(who, { c: k }); }; box.appendChild(b); });
+            ar.appendChild(box);
+          } else {
+            var fr = document.createElement('div'); fr.className = 'ky-free';
+            fr.innerHTML = '<input type="text" maxlength="20" enterkeyhint="done" placeholder="答えを書く" aria-label="答え"><button type="button" class="k-btn k-btn-sm">決定</button>';
+            var inp = fr.querySelector('input'), go = function(){ var v = inp.value.trim(); if (!v) { inp.focus(); return; } answer(who, { t: v }); };
+            fr.querySelector('button').onclick = go; inp.addEventListener('keydown', function(e){ if (e.key === 'Enter') go(); });
+            ar.appendChild(fr); setTimeout(function(){ inp.focus(); }, 50);
+          }
+          var sk = document.createElement('button'); sk.type = 'button'; sk.className = 'k-btn k-btn-sub'; sk.style.marginTop = '12px'; sk.textContent = 'このお題はとばす';
+          sk.onclick = function(){ answer(who, { skip: true, c: -1 }); }; ar.appendChild(sk);
+        }
+      } else {
+        var waiting = 0; for (var i = 0; i < S.n; i++) if (A[i] == null) waiting++;
+        ar.innerHTML = '<div class="ky-cover"><p>' + (waiting ? 'この部屋の人は答えました。<br>' + (STREAM ? '回答コードを待つか、そのままオープンできます（届いていない人の答えは、オープンのあとで押せます）。' : 'せーので、みんなのスマホを見せ合おう。') : '全員の答えがそろいました。') + '</p><button type="button" class="k-btn k-btn-main k-btn-big" id="openGo">せーので オープン</button></div>';
+        $('openGo').onclick = doOpen;
+      }
+    } else {
+      renderOpen();
+    }
+    renderStatus();
+    pushView();
+    fitSoon();
+  }
+  function answer(i, v){
+    S.a[S.qi][i] = v; S.cover = true;
+    track('ky_answer', {});
+    renderPlay();
+  }
+  function renderStatus(){
+    var ul = $('statusList'), A = S.a[S.qi] || [], uke = acUke(acSeed(S.g, S.r, S.qi), S.n);
+    ul.innerHTML = '';
+    ul.hidden = S.phase === 'open';   // オープン中は上の一覧と同じなので出さない
+    for (var i = 0; i < S.n; i++) {
+      var li = document.createElement('li'), x = A[i];
+      var st = x ? (x.code ? '受け取りました（受付 ' + uke[i] + '）' : '答えました') : (isRemote(i) ? (STREAM ? '回答コード待ち' : 'スマホで答え中') : 'まだ');
+      if (S.phase === 'open') st = ansLabel(S.qi, i) || '（オープンのあとで押す）';
+      li.className = x ? 'done' : '';
+      li.innerHTML = '<span>' + esc(san(nm(i))) + '</span><i>' + esc(st) + '</i>';
+      ul.appendChild(li);
+    }
+  }
+  function doOpen(){
+    var go = function(){ S.phase = 'open'; S.sel = [];
+      var o = cur();
+      // 自由に答えるお題：同じ字の答えは最初からまとめておく（進行役が直せる）
+      if (!o.c && !S.grp[S.qi]) {
+        var m = {}, A = S.a[S.qi];
+        for (var i = 0; i < S.n; i++) if (A[i] && A[i].t) { var k = norm(A[i].t); (m[k] = m[k] || []).push(i); }
+        S.grp[S.qi] = Object.keys(m).map(function(k){ return m[k]; }).filter(function(g){ return g.length >= 2; });
+      }
+      renderPlay();
+      if (groupsOf(S.qi).length) stampHit();
+    };
+    viewSend(viewState('cd'));
+    if (window.KKit && KKit.countdown && !(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) KKit.countdown(3, { onDone: go, step: 650 });
+    else go();
+  }
+  function stampHit(){ var s = document.querySelector('#openArea .k-stamp'); if (s && window.KKit && KKit.reveal) { s.classList.add('k-reveal-stamp'); KKit.reveal(s); } }
+  function renderOpen(){
+    var o = cur(), op = $('openArea'), A = S.a[S.qi], gs = groupsOf(S.qi);
+    var inG = function(i){ return gs.some(function(g){ return g.indexOf(i) >= 0; }); };
+    var h = '<ul class="ky-open">';
+    for (var i = 0; i < S.n; i++) {
+      var lab = ansLabel(S.qi, i);
+      h += '<li class="' + (inG(i) ? 'hit' : '') + '"><span class="nm">' + esc(san(nm(i))) + '</span><span class="an">' + esc(lab || 'まだ') + '</span>';
+      if (o.c && (A[i] == null || A[i].late)) {
+        h += '<div class="set"><div class="k-seg" role="group" data-seat="' + i + '">' + o.c.map(function(c, k){ return '<button type="button" data-k="' + k + '" aria-pressed="' + (A[i] && A[i].c === k) + '">' + esc(c) + '</button>'; }).join('') + '<button type="button" data-k="-1" aria-pressed="' + (A[i] && A[i].c === -1) + '">とばす</button></div></div>';
+      }
+      h += '</li>';
+    }
+    h += '</ul>';
+    if (!o.c) {
+      h += '<p class="ky-note">同じ答えの人を選んで「同じ！」。言い方が違っても、同じだと思えばまとめてOK。</p><div class="ky-grpbar" id="grpPick">';
+      for (var j = 0; j < S.n; j++) h += '<button type="button" class="ky-pick" data-i="' + j + '" aria-pressed="' + (S.sel.indexOf(j) >= 0) + '">' + esc(san(nm(j))) + '</button>';
+      h += '</div><div class="ky-grpbar"><button type="button" class="k-btn k-btn-sm" id="grpSame">同じ！</button><button type="button" class="k-btn k-btn-sub" id="grpClear">まとめを消す</button></div>';
+    }
+    var hitTxt = gs.map(function(g){ return g.map(function(i){ return san(nm(i)); }).join('と') + 'が「' + groupLabel(S.qi, g) + '」'; }).join('、');
+    h += gs.length ? '<div class="ky-verdict"><span class="k-stamp">共通<br>点</span><p>' + esc(hitTxt) + 'で同じ！</p></div>'
+      : '<div class="ky-verdict miss"><p>' + (A.filter(Boolean).length < S.n && o.c ? '届いていない人の答えを押してください' : 'こんどは共通点なし') + '</p></div>';
+    op.innerHTML = h;
+    [].forEach.call(op.querySelectorAll('.k-seg[data-seat]'), function(seg){
+      seg.addEventListener('click', function(e){ var b = e.target.closest('button'); if (!b) return; var i = +seg.dataset.seat, had = groupsOf(S.qi).length;
+        S.a[S.qi][i] = { c: +b.dataset.k, late: 1, skip: b.dataset.k === '-1' }; renderPlay(); if (!had && groupsOf(S.qi).length) stampHit(); });
+    });
+    if (!o.c) {
+      [].forEach.call(op.querySelectorAll('.ky-pick'), function(b){ b.onclick = function(){ var i = +b.dataset.i, k = S.sel.indexOf(i); if (k >= 0) S.sel.splice(k, 1); else S.sel.push(i); renderPlay(); }; });
+      $('grpSame').onclick = function(){
+        if (S.sel.length < 2) { toast('同じ答えの人を2人以上選んでね'); return; }
+        var had = groupsOf(S.qi).length;
+        S.grp[S.qi] = (S.grp[S.qi] || []).map(function(g){ return g.filter(function(i){ return S.sel.indexOf(i) < 0; }); }).filter(function(g){ return g.length >= 2; });
+        S.grp[S.qi].push(S.sel.slice().sort()); S.sel = []; renderPlay(); if (!had) stampHit();
+      };
+      $('grpClear').onclick = function(){ S.grp[S.qi] = []; S.sel = []; renderPlay(); };
+    }
+    var acts = $('playActs'), last = S.qi >= S.qs.length - 1;
+    acts.innerHTML = '<button type="button" class="k-btn k-btn-main" id="nextGo">' + (last ? '結果を見る' : '次のお題') + '</button>' + (last ? '' : '<button type="button" class="k-btn k-btn-sub" id="endGo">ここで結果へ</button>');
+    $('nextGo').onclick = function(){ if (last) showResult(); else { S.qi++; beginQ(); } };
+    if (!last) $('endGo').onclick = showResult;
+  }
+
+  // ===== 回答コードを受け取る =====
+  (function(){
+    var ta = $('acIn');
+    ta.addEventListener('paste', function(e){ var t = ''; try { t = (e.clipboardData || window.clipboardData).getData('text'); } catch (x) {} if (!t) return; e.preventDefault(); ta.value = ''; acReceive(t); });
+    ta.addEventListener('keydown', function(e){ if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); acReceive(ta.value); ta.value = ''; } });
+    $('acGo').addEventListener('click', function(){ acReceive(ta.value); ta.value = ''; ta.focus(); });
+  })();
+  var STAMPQ = [];
+  function acReceive(text){
+    var m = $('acMsg'), say = function(t, ng){ m.className = 'ky-msg' + (ng ? ' ng' : ''); m.textContent = t; };
+    var toks = []; (String(text || '').toUpperCase().match(AC_RE) || []).forEach(function(t){ if (toks.indexOf(t) < 0) toks.push(t); });
+    if (!toks.length) { say(String(text || '').trim() ? 'このゲームのコードではありません' : 'コードを貼ってください', !!String(text || '').trim()); return; }
+    var nms = names(), ok = [], msg = [], bad = 0;
+    toks.forEach(function(code){
+      var hit = null;
+      for (var q = 0; q < S.qs.length && !hit; q++) { var o = BYID[S.qs[q]]; var d = acDecode(acSeed(S.g, S.r, q), nms, code, o.c ? o.c.length : 0); if (d) hit = { q: q, d: d }; }
+      if (!hit) { bad++; return; }
+      var q2 = hit.q, i = hit.d.seat, uke = acUke(acSeed(S.g, S.r, q2), S.n)[i];
+      if (q2 < S.qi || (q2 === S.qi && S.phase === 'open')) { msg.push('第' + (q2 + 1) + '問はもうオープンしました'); return; }
+      S.rv[q2] = S.rv[q2] || {};
+      if (S.rv[q2][i]) { msg.push(san(nm(i)) + 'の第' + (q2 + 1) + '問は受け取り済み'); return; }
+      S.rv[q2][i] = { a: hit.d.ans, u: uke };
+      if (q2 === S.qi && S.a[S.qi][i] == null) S.a[S.qi][i] = { c: hit.d.ans, code: 1, skip: hit.d.ans === -1 };
+      ok.push(san(nm(i)) + (q2 === S.qi ? '' : '（第' + (q2 + 1) + '問）'));
+      if (q2 === S.qi) STAMPQ.push({ n: san(nm(i)), u: uke });
+    });
+    if (ok.length) msg.unshift(ok.join('・') + ' 受け取りました');
+    if (bad) msg.push('このゲームのコードではありません' + (toks.length > 1 ? '（' + bad + '件）' : ''));
+    say(msg.join('。'), !ok.length);
+    renderPlay();
+    flushStamps();
+  }
+  function flushStamps(){
+    if (!STAMPQ.length) return;
+    var s = STAMPQ.shift(), st = viewState(); st.stamp = { n: s.n, u: s.u, id: Math.random() };
+    viewSend(st);
+    if (STAMPQ.length) setTimeout(flushStamps, 1300);
+  }
+
+  // 参加リンク（離れたゲスト・各自のスマホ）。名前とお題の番号だけ。答えは入らない
+  function joinUrl(){
+    var rm = []; for (var i = 1; i < S.n; i++) if (isRemote(i)) rm.push(i);
+    var o = { v: 1, g: S.g, r: S.r, n: names(), m: rm, q: S.qs, s: STREAM ? 1 : 0 };
+    return location.origin + '/?p=' + b64e(o) + (window.__kkpTest ? '&kkptest=1' : '');
+  }
+  $('joinBox').addEventListener('toggle', function(){
+    if (!$('joinBox').open) { fitSoon(); return; }
+    var u = joinUrl();
+    loadQR(function(){ var q = qrcode(0, 'L'); q.addData(u); q.make(); $('qrBox').innerHTML = q.createSvgTag({ cellSize: 4, margin: 8, scalable: false }); });
+    $('joinNote').textContent = STREAM ? 'このリンクをDiscordなどでゲストに送ります。開くと名前を選んで答える画面になり、答えると回答コードが出ます。お題を変えたら（もう1回）リンクも送り直してください。' : 'QRを読むと、自分の名前を選んで答える画面が開きます。答えたら、せーので画面を見せ合ってね。';
+    fitSoon();
+  });
+  $('joinCopy').addEventListener('click', function(){ copyText('共通点探しの参加リンク: ' + joinUrl(), 'リンクをコピーしました'); });
+  function loadQR(cb){ if (window.qrcode) { cb(); return; } var sc = document.createElement('script'); sc.src = '/js/qrcode.js'; sc.onload = cb; document.head.appendChild(sc); }
+
+  // ===== 結果 =====
+  function pairs(){
+    var out = [], last = S.phase === 'open' ? S.qi : S.qi - 1;
+    for (var i = 0; i < S.n; i++) for (var j = i + 1; j < S.n; j++) {
+      var hits = [];
+      for (var q = 0; q <= last; q++) groupsOf(q).forEach(function(g){ if (g.indexOf(i) >= 0 && g.indexOf(j) >= 0) hits.push({ q: q, l: groupLabel(q, g) }); });
+      out.push({ i: i, j: j, hits: hits });
+    }
+    return out.sort(function(a, b){ return b.hits.length - a.hits.length; });
+  }
+  function resultData(){
+    var last = S.phase === 'open' ? S.qi : S.qi - 1, total = last + 1, ps = pairs(), all = [];
+    for (var q = 0; q <= last; q++) groupsOf(q).forEach(function(g){ if (g.length === S.n) all.push({ q: q, l: groupLabel(q, g) }); });
+    return { total: total, ps: ps, all: all, last: last };
+  }
+  function showResult(){
+    var R = resultData(), h = '';
+    if (S.n === 2) {
+      var p = R.ps[0];
+      h += '<div class="k-result"><small>' + esc(san(nm(0))) + 'と' + esc(san(nm(1))) + 'の共通点</small><b class="k-num">' + p.hits.length + '個</b><small>' + R.total + '問中</small></div>';
+      if (p.hits.length) {
+        h += '<h2 class="k-h3">同じだった答え</h2><table class="k-table-result"><tbody>' + p.hits.map(function(x){ return '<tr><td>' + esc(BYID[S.qs[x.q]].q) + '</td><td class="k-r">' + esc(x.l) + '</td></tr>'; }).join('') + '</tbody></table>';
+      }
+    } else {
+      var top = R.ps[0];
+      h += '<div class="k-result"><small>いちばん共通点が多かったのは</small><b>' + esc(san(nm(top.i))) + 'と' + esc(san(nm(top.j))) + '</b><small>' + top.hits.length + '個 / ' + R.total + '問中</small></div>';
+      h += '<h2 class="k-h3">ペアごとの共通点</h2><table class="k-table-result"><thead><tr><th>ペア</th><th class="k-r">共通点</th></tr></thead><tbody>' + R.ps.map(function(p, k){ return '<tr' + (k === 0 && p.hits.length ? ' class="k-win"' : '') + '><td>' + esc(san(nm(p.i))) + 'と' + esc(san(nm(p.j))) + '<br><small>' + esc(p.hits.map(function(x){ return x.l; }).join('・')) + '</small></td><td class="k-r k-num">' + p.hits.length + '個</td></tr>'; }).join('') + '</tbody></table>';
+      if (R.all.length) h += '<h2 class="k-h3">全員が同じだった答え</h2><table class="k-table-result"><tbody>' + R.all.map(function(x){ return '<tr><td>' + esc(BYID[S.qs[x.q]].q) + '</td><td class="k-r">' + esc(x.l) + '</td></tr>'; }).join('') + '</tbody></table>';
+    }
+    // ちがった答え（ズレも笑いどころ）
+    var miss = [];
+    for (var q = 0; q <= R.last; q++) if (!groupsOf(q).length) {
+      var row = []; for (var i = 0; i < S.n; i++) row.push(san(nm(i)) + '「' + (ansLabel(q, i) || '―') + '」');
+      miss.push('<li><b>' + esc(BYID[S.qs[q]].q) + '</b>' + esc(row.join('　')) + '</li>');
+    }
+    if (miss.length) h += '<details class="k-fold" style="margin-top:16px"><summary>ちがった答え（' + miss.length + '問）</summary><div><ul class="ky-miss">' + miss.join('') + '</ul></div></details>';
+    $('resBody').innerHTML = h;
+    show('result');
+    var rb = document.querySelector('#resBody .k-result'); if (rb && window.KKit && KKit.reveal) { rb.classList.add('k-reveal'); KKit.reveal(rb); }
+    pushView(true);
+    track('ky_result', { n: S.n, hits: R.ps[0] ? R.ps[0].hits.length : 0 });
+    // 広告は結果のあとだけ（配信モードでは読まない）。枠を見せた次のフレームで push
+    if (!STREAM && !window.__kkpTest && !$('adWrap').dataset.done) {
+      $('adWrap').hidden = false; $('adWrap').dataset.done = '1';
+      requestAnimationFrame(function(){ window.__kyLoadAds(function(){ try { (window.adsbygoogle = window.adsbygoogle || []).push({}); } catch (e) {} }); });
+    }
+  }
+
+  // ===== /view/ に送る中身（答えはオープンのあとだけ） =====
+  function viewState(step){
+    var o = cur(), A = S.a[S.qi] || [], st = { step: step || 'q', names: names(), qn: S.qi + 1, total: S.qs.length, hits: hitCount(), n: S.n };
+    if (!o) return st;
+    st.q = o.q; st.c = o.c; st.pack = PACKS[o.p];
+    var uke = acUke(acSeed(S.g, S.r, S.qi), S.n);
+    st.done = []; st.uke = [];
+    for (var i = 0; i < S.n; i++) { st.done.push(A[i] != null); st.uke.push(A[i] && A[i].code ? uke[i] : ''); }
+    if (step === 'open') {
+      st.ans = []; for (var j = 0; j < S.n; j++) st.ans.push(ansLabel(S.qi, j));
+      st.groups = groupsOf(S.qi).map(function(g){ return { m: g, l: groupLabel(S.qi, g) }; });
+    }
+    return st;
+  }
+  function pushView(isResult){
+    if (!STREAM) return;
+    if (isResult) {
+      var R = resultData();
+      viewSend({ step: 'result', names: names(), n: S.n, total: R.total, pairs: R.ps.map(function(p){ return { a: nm(p.i), b: nm(p.j), k: p.hits.length, l: p.hits.map(function(x){ return x.l; }) }; }), all: R.all.map(function(x){ return x.l; }) });
+      return;
+    }
+    if ($('play').hidden) return;
+    viewSend(viewState(S.phase === 'open' ? 'open' : 'q'));
+  }
+  if (STREAM) viewSend({ step: 'setup', names: names(), n: S.n });
+
+  // ===== 配信モード：遊んでいる画面を1画面に（はぁ・ワードウルフと同じ基準） =====
+  var fitT = 0;
+  function fitSoon(){ clearTimeout(fitT); fitT = setTimeout(fit, 30); }
+  function fit(){
+    var r = document.documentElement, b = document.body;
+    if (!STREAM || !b.classList.contains('in-game') || innerWidth < 768) { r.style.removeProperty('--z'); return; }
+    $('uniFoot').style.display = 'none';
+    var z = Math.min(innerWidth / 1240, 1.4); r.style.setProperty('--z', z.toFixed(3));
+    // 参加リンクを開いている間は縮めない（そのときだけスクロールしてよい）
+    if ($('joinBox').open && !$('joinBox').hidden) return;
+    for (var i = 0; i < 40 && r.scrollHeight > innerHeight + 1 && z > 0.3; i++) { z *= 0.96; r.style.setProperty('--z', z.toFixed(3)); }
+  }
+  window.addEventListener('resize', fitSoon);
+  window.__ky = { S: S, startGame: startGame, acEncode: acEncode, acSeed: acSeed, names: names, doOpen: doOpen, showResult: showResult, answer: answer, renderPlay: renderPlay, acReceive: acReceive };
+
+  // ===== 回答画面 =====
+  function runGuest(){
+    document.getElementById('setup').hidden = true;
+    document.getElementById('about').hidden = true;
+    var sec = $('guest'); sec.hidden = false;
+    var P = null; try { P = b64d(new URLSearchParams(location.search).get('p')); } catch (e) {}
+    var ok = P && Array.isArray(P.n) && Array.isArray(P.q) && P.q.every(function(id){ return BYID[id]; });
+    if (!ok) { $('gWho').innerHTML = '<p class="ky-lead">リンクが読めませんでした。送ってくれた人に、もう一度リンクをもらってください。</p><a class="k-link" href="/">共通点探しゲームのトップへ</a>'; return; }
+    var key = 'ky-g-' + P.g + '-' + P.r, G = ssGet(key, { seat: -1, qi: 0, a: {} });
+    var host = san(P.n[0]);
+    function save(){ ssSet(key, G); }
+    function who(){
+      if (G.seat >= 0) { $('gWho').innerHTML = ''; $('gPlay').hidden = false; draw(); return; }
+      var h = '<p class="ky-lead">あなたはどなた？名前を選んでください。</p><div class="k-seg k-seg-2" role="group" id="gSeat">';
+      (P.m || []).forEach(function(i){ h += '<button type="button" data-i="' + i + '">' + esc(san(P.n[i])) + '</button>'; });
+      $('gWho').innerHTML = h + '</div>';
+      $('gSeat').onclick = function(e){ var b = e.target.closest('button'); if (!b) return; G.seat = +b.dataset.i; save(); who(); };
+    }
+    function draw(){
+      var o = BYID[P.q[G.qi]], pick = G.a[G.qi];
+      $('gPos').textContent = '第' + (G.qi + 1) + '問 / ' + P.q.length;
+      $('gPrev').disabled = G.qi === 0; $('gNext').disabled = G.qi >= P.q.length - 1;
+      $('gName').textContent = san(P.n[G.seat]) + 'の答え';
+      $('gQ').textContent = o.q;
+      var ga = $('gAns'), out = $('gOut'); ga.innerHTML = ''; out.innerHTML = '';
+      if (o.c) {
+        var box = document.createElement('div'); box.className = 'ky-choices';
+        o.c.concat(['とばす']).forEach(function(c, k){ var v = k < o.c.length ? k : -1; var b = document.createElement('button'); b.type = 'button'; b.textContent = c; b.setAttribute('aria-pressed', String(pick === v)); b.onclick = function(){ G.a[G.qi] = v; save(); draw(); }; box.appendChild(b); });
+        ga.appendChild(box);
+        if (pick != null) {
+          if (P.s === 1) {
+            var seed = acSeed(P.g, P.r, G.qi), code = acEncode(seed, P.n, G.seat, pick), uk = acUke(seed, P.n.length)[G.seat];
+            out.innerHTML = '<div class="ky-code"><span class="uk">回答コード（受付 ' + uk + '）</span><span class="cd">' + code + '</span><button type="button" class="k-btn k-btn-main" id="gCopy" style="width:100%;margin-top:8px">回答コードをコピー</button><p class="ky-note">DiscordやLINEに貼って' + esc(host) + 'に送ってね。答えはコードの中に隠れています。配信に「受付 ' + uk + '」が出たら届いています。</p></div>';
+            $('gCopy').onclick = function(){ copyText('共通点探しの回答コード ' + code + '（受付 ' + uk + '）', 'コピーしました。' + host + 'に送ってね'); track('ky_answer_code', {}); };
+          } else {
+            out.innerHTML = '<div class="ky-big"><small>せーので画面を見せてね</small><b>' + esc(pick === -1 ? 'とばす' : o.c[pick]) + '</b></div>';
+          }
+        }
+      } else {
+        var fr = document.createElement('div'); fr.className = 'ky-free';
+        fr.innerHTML = '<input type="text" maxlength="20" placeholder="答えを書く（メモ）" aria-label="答え">';
+        var inp = fr.querySelector('input'); inp.value = typeof pick === 'string' ? pick : '';
+        inp.addEventListener('input', function(){ G.a[G.qi] = inp.value; save(); big(); });
+        ga.appendChild(fr);
+        var big = function(){ out.innerHTML = inp.value ? '<div class="ky-big"><small>' + (P.s === 1 ? 'オープンの合図で声に出して言ってね' : 'せーので画面を見せてね') + '</small><b>' + esc(inp.value) + '</b></div>' : ''; };
+        big();
+      }
+      $('gHint').textContent = o.c ? (P.s === 1 ? host + 'が「第' + (G.qi + 1) + '問」を出したら答えてね。先の問題まで答えて、まとめてコードを送ってもOK。' : '答えたら、みんなでせーので画面を見せ合おう。') : 'このお題は自由に答えます。' + (P.s === 1 ? 'コードはありません。オープンの合図で声に出してね。' : '');
+    }
+    $('gPrev').onclick = function(){ if (G.qi > 0) { G.qi--; save(); draw(); window.scrollTo(0, 0); } };
+    $('gNext').onclick = function(){ if (G.qi < P.q.length - 1) { G.qi++; save(); draw(); window.scrollTo(0, 0); } };
+    who();
+  }
+})();
+</script>
+</body>
+</html>

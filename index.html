@@ -397,7 +397,7 @@ body.stream.in-game .ky-choices{grid-template-columns:1fr 1fr}
       <div class="ky-qnav"><button type="button" class="k-btn k-btn-sub" id="gPrev">前へ</button><span class="k-num" id="gPos" style="font-family:var(--k-bold)">第1問 / 5</span><button type="button" class="k-btn k-btn-sub" id="gNext">次へ</button></div>
       <div class="ky-q"><small id="gName"></small><p id="gQ"></p></div>
       <div id="gAns"></div>
-      <div id="gOut"></div>
+      <div id="gCodeOut"></div>
       <p class="ky-note" id="gHint"></p>
     </div>
   </section>
@@ -1158,7 +1158,7 @@ body.stream.in-game .ky-choices{grid-template-columns:1fr 1fr}
       $('gPrev').disabled = G.qi === 0; $('gNext').disabled = G.qi >= P.q.length - 1;
       $('gName').textContent = san(P.n[G.seat]) + 'の答え';
       $('gQ').textContent = o.q;
-      var ga = $('gAns'), out = $('gOut'); ga.innerHTML = ''; out.innerHTML = '';
+      var ga = $('gAns'), out = $('gCodeOut'); ga.innerHTML = ''; out.innerHTML = '';
       var box = document.createElement('div'); box.className = 'ky-choices';
       cs.concat(['とばす']).forEach(function(c, k){ var v = k < cs.length ? k : -1; var b = document.createElement('button'); b.type = 'button'; b.textContent = c; b.setAttribute('aria-pressed', String(pick === v)); b.onclick = function(){ G.a[G.qi] = v; save(); draw(); }; box.appendChild(b); });
       ga.appendChild(box);

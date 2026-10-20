@@ -19,48 +19,81 @@
 <style>
 html,body{margin:0;height:100%;overflow:hidden;background:var(--k-kinari)}
 #stage{position:absolute;left:50%;top:50%;width:1600px;height:900px;transform-origin:0 0;box-sizing:border-box;padding:40px 56px;display:flex;flex-direction:column;background:var(--k-kinari) url(/kit/img/d4-washi.webp) 0 0/420px auto;font-family:var(--k-body);color:var(--k-sumi)}
+/* 話しながら探す：帯だけ。まわりは無地（OBSでクロップか、カラーキーで抜く） */
+#stage.band{background:var(--k-kinari);padding:0}
+#stage.band .top{display:none}
 .top{display:flex;align-items:center;justify-content:space-between;gap:24px;padding-bottom:16px;border-bottom:4px solid var(--k-sumi)}
 .top .ttl{font-family:var(--k-brush);font-size:44px;letter-spacing:.14em}
 .top .meta{display:flex;align-items:center;gap:28px;font-family:var(--k-bold);font-size:38px}
-.top .meta b{color:var(--k-shu);font-size:52px;font-variant-numeric:tabular-nums}
-.band{display:inline-block;margin-right:16px;padding:4px 20px;background:var(--k-sumi);color:#fff;font-family:var(--k-bold);font-size:30px;transform:skewX(-8deg)}
-.main{flex:1;display:flex;flex-direction:column;min-height:0;padding-top:12px}
-.q{font-family:var(--k-bold);font-size:76px;line-height:1.2;letter-spacing:.03em;word-break:auto-phrase;text-wrap:balance}
-.q.sm{font-size:52px}
+.band-l{display:inline-block;margin-right:16px;padding:4px 20px;background:var(--k-sumi);color:#fff;font-family:var(--k-bold);font-size:30px;transform:skewX(-8deg)}
+.main{position:relative;flex:1;display:flex;flex-direction:column;min-height:0;padding-top:12px}
 .pack{font-size:30px;font-weight:800;color:var(--k-text-2);margin-bottom:6px}
+.q{font-family:var(--k-bold);font-size:76px;line-height:1.2;letter-spacing:.03em;word-break:auto-phrase;text-wrap:balance}
+.q.sm{font-size:54px}
 .choices{display:flex;flex-wrap:wrap;gap:16px;margin-top:28px}
 .choices span{padding:10px 26px;border:3px solid var(--k-sumi);border-radius:8px;background:#fff;font-size:42px;font-weight:800}
-.free{margin-top:28px;font-size:40px;font-weight:800;color:var(--k-text-2)}
-.players{display:grid;gap:16px;margin-top:auto}
-.pl{position:relative;padding:14px 18px;border:3px solid var(--k-sumi);border-radius:8px;background:#fff;min-width:0}
+.players{display:grid;gap:16px;margin-top:28px}
+.players.open{flex:1;min-height:0;margin-top:20px}
+.pl{position:relative;display:flex;flex-direction:column;justify-content:center;padding:14px 22px;border:3px solid var(--k-sumi);border-radius:8px;background:#fff;min-width:0;min-height:0;overflow:hidden}
 .pl .nm{display:block;font-size:34px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .pl .st{display:block;font-family:var(--k-bold);font-size:34px;color:var(--k-text-2)}
 .pl.done .st{color:var(--k-shu)}
-.pl .an{display:block;font-family:var(--k-bold);font-size:56px;line-height:1.15;word-break:auto-phrase}
-.pl.hit{border-color:var(--k-shu);border-width:6px;padding:11px 15px}
+.pl .an{display:block;font-family:var(--k-bold);line-height:1.12;word-break:auto-phrase}
+.pl.hit{border-color:var(--k-shu);border-width:7px;padding:10px 18px}
 .pl.hit .an{color:var(--k-shu)}
-.verdict{display:flex;align-items:center;gap:28px;margin-top:20px;font-size:42px;line-height:1.3;font-weight:800;min-height:116px}
-.verdict .k-stamp{flex:0 0 auto;width:116px;height:116px;font-size:36px;line-height:1.05;text-align:center}
-.verdict.miss{color:var(--k-text-2)}
-.ask{margin-top:24px;padding:16px 0;border-top:2px solid var(--k-line-soft);font-size:40px;font-weight:800}
+.verdict{display:flex;align-items:center;gap:28px;margin-top:18px;font-size:46px;line-height:1.25;font-weight:800;min-height:128px}
+.verdict .k-stamp{flex:0 0 auto;width:128px;height:128px;font-size:38px;line-height:1.05;text-align:center}
+.verdict .rare{display:inline-block;margin-right:16px;padding:2px 16px;border:4px solid var(--k-shu);border-radius:6px;color:var(--k-shu);font-family:var(--k-bold);font-weight:400}
+.verdict .tx{min-width:0;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.follow{margin-top:8px;font-size:38px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.follow span,.ask span{margin-right:16px;color:var(--k-text-2);font-size:30px}
+.ask{margin-top:24px;padding:14px 0 0;border-top:2px solid var(--k-line-soft);font-size:40px;font-weight:800}
 .ask b{color:var(--k-shu)}
-.big{font-family:var(--k-brush);font-size:110px;letter-spacing:.14em;line-height:1.1;margin-top:20px}
+.big{font-family:var(--k-brush);font-size:110px;letter-spacing:.14em;line-height:1.1;margin:20px 0 0}
 .names{margin-top:28px;font-family:var(--k-bold);font-size:56px;line-height:1.3}
-.res{display:flex;gap:48px;align-items:flex-start;flex:1;min-height:0}
-.res .k-result{flex:0 0 640px}
+.res{display:flex;gap:48px;align-items:center;flex:1;min-height:0;padding-top:20px}
+.res .k-result{flex:0 0 560px}
 .res .k-result small{font-size:30px}
-.res .k-result b{font-size:96px}
-.res ul{flex:1;margin:0;padding:0;list-style:none;font-size:38px;font-weight:800;line-height:1.35;min-width:0}
-.res li{padding:10px 0;border-bottom:2px solid var(--k-line-soft);overflow:hidden}
-.res li small{display:block;font-size:28px;color:var(--k-text-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.res li b{color:var(--k-shu);flex:0 0 auto}
-.res .rw{display:flex;justify-content:space-between;gap:16px}.res .rw>span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.res .k-result b.pair{font-size:52px;line-height:1.2;word-break:break-all}
-.players.many .an{font-size:42px}.players.many .pl{padding:10px 14px}.players.many .pl.hit{padding:7px 11px}
+.res .k-result b{font-size:110px}
+.res .best{flex:1;min-width:0;padding-top:12px}
+.res .best small{display:block;font-size:34px;font-weight:800;color:var(--k-text-2)}
+.res .best b{display:block;margin-top:8px;font-family:var(--k-bold);font-weight:400;font-size:84px;line-height:1.15;color:var(--k-shu);word-break:auto-phrase}
+.res .best span{display:block;margin-top:12px;font-size:38px;font-weight:800;line-height:1.35}
+.res ul{flex:1;margin:0;padding:0;list-style:none;font-size:42px;font-weight:800;line-height:1.3;min-width:0}
+.res li{padding:10px 0;border-bottom:2px solid var(--k-line-soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* 帯 */
+.bd{position:absolute;box-sizing:border-box;background:#fff;border:5px solid var(--k-sumi);border-radius:10px;padding:18px 26px;box-shadow:6px 6px 0 var(--k-sumi)}
+.bd.tr,.bd.br{right:32px;width:560px}
+.bd.tr{top:32px}.bd.br{bottom:32px}
+.bd.b{left:32px;right:32px;bottom:32px;display:flex;align-items:center;gap:32px;padding:14px 28px}
+.bd .ct{display:flex;align-items:baseline;gap:14px;font-family:var(--k-bold);white-space:nowrap}
+.bd .ct small{font-size:38px}
+.bd .ct b{font-size:88px;line-height:1;color:var(--k-shu);font-weight:400;font-variant-numeric:tabular-nums}
+.bd .ct i{font-style:normal;font-size:48px}
+.bd ol{margin:10px 0 0;padding:0;list-style:none;counter-reset:n}
+.bd ol li{counter-increment:n;padding:6px 0;border-top:2px solid var(--k-line-soft);font-size:36px;font-weight:800;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bd ol li::before{content:counter(n);display:inline-block;width:1.4em;font-family:var(--k-bold);color:var(--k-shu)}
+.bd.b ol{flex:1;min-width:0;margin:0;display:flex;gap:28px;overflow:hidden}
+.bd.b ol li{border:0;flex:1 1 0;min-width:0}
+.bd .more{font-size:28px;color:var(--k-text-2);font-weight:800}
+.bd .hint{margin-top:10px;font-size:28px;font-weight:800;color:var(--k-text-2)}
+.bd.b .hint{margin:0;flex:none}
+.tp{position:absolute;box-sizing:border-box;left:32px;top:32px;width:940px;padding:28px 34px;background:#fff;border:5px solid var(--k-sumi);border-radius:10px}
+.tp.wide{left:50%;transform:translateX(-50%);width:1200px}
+.tp small{display:block;font-size:32px;font-weight:800;color:var(--k-text-2)}
+.tp .q{margin-top:6px;font-size:66px}
+.tp .f{margin-top:14px;font-size:40px;font-weight:800}
+#cel{position:absolute;inset:0;display:grid;place-items:center;background:rgba(251,243,228,.88)}
+#cel .k-result{min-width:820px;padding:20px 0}
+#cel .k-result b{font-size:120px}
+#cel .k-result small{font-size:40px}
 #cd{position:absolute;inset:0;display:grid;place-items:center;background:rgba(251,243,228,.92);font-family:var(--k-bold);font-size:300px;color:var(--k-shu);text-shadow:var(--k-outline)}
 #stp{position:absolute;right:56px;top:140px;display:flex;align-items:center;gap:20px;padding:18px 28px;border:4px solid var(--k-shu);border-radius:8px;background:#fff;font-size:40px;font-weight:800;transform:rotate(-2deg)}
 #stp .mk{display:grid;place-items:center;width:80px;height:80px;background:url(/kit/img/d4-hanko.webp) center/100% 100% no-repeat;font-family:var(--k-brush);font-size:40px;color:var(--k-shu)}
 #stp .uk{color:var(--k-shu);font-family:var(--k-bold)}
+#tst{position:absolute;display:flex;align-items:center;gap:22px;padding:16px 26px;background:#fff;border:4px solid var(--k-shu);border-radius:10px;font-size:40px;font-weight:800;max-width:900px}
+#tst .k-stamp{flex:none;width:120px;height:120px;font-size:36px;line-height:1.05;text-align:center}
+#tst span.t{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 [hidden]{display:none!important}
 @media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
 </style>
@@ -69,6 +102,8 @@ html,body{margin:0;height:100%;overflow:hidden;background:var(--k-kinari)}
 <div id="stage">
   <div class="top"><span class="ttl">共通点探し</span><span class="meta" id="meta"></span></div>
   <div class="main" id="main"><p class="big">共通点探し</p><p class="ask">操作ページ（同じブラウザ）で配信モードにすると、ここに場面が出ます。</p></div>
+  <div id="tst" hidden></div>
+  <div id="cel" hidden></div>
   <div id="cd" hidden></div>
   <div id="stp" hidden></div>
 </div>
@@ -79,59 +114,101 @@ html,body{margin:0;height:100%;overflow:hidden;background:var(--k-kinari)}
   function san(n){ n = String(n || ''); return /(さん|様|くん|君|ちゃん|氏)$/.test(n) ? n : n + 'さん'; }
   function fit(){ var s = $('stage'), z = Math.min(innerWidth / 1600, innerHeight / 900); s.style.transform = 'scale(' + z + ') translate(-50%,-50%)'; }
   window.addEventListener('resize', fit); fit();
-  var lastStamp = null, stT = 0, cdT = 0, lastStep = '';
+  function reveal(el, cls){ if (el && window.KKit && KKit.reveal) { el.classList.add(cls || 'k-reveal-stamp'); KKit.reveal(el); } }
+  var lastStamp = null, lastTs = null, lastCel = null, stT = 0, tsT = 0, celT = 0, cdT = 0, lastStep = '';
   function cols(n){ return 'grid-template-columns:repeat(' + (n >= 5 ? 3 : n) + ',minmax(0,1fr))'; }
+  function anSize(n){ return n <= 2 ? 104 : n === 3 ? 84 : n === 4 ? 70 : 58; }
+  function stamp(hit){ return '<span class="k-stamp' + (hit ? '' : ' k-stamp-sumi') + '" id="vst">' + (hit ? '共通<br>点！' : 'ズレ<br>た！') + '</span>'; }
+  function band(s){
+    var it = s.items || [], k = it.length, pos = s.pos || 'tr', show = pos === 'b' ? it.slice(-3) : it.slice(-5), more = k - show.length;
+    var h = '<div class="bd ' + pos + '"><div class="ct"><small>共通点</small><b>' + k + '</b><i>/ ' + (s.goal || 5) + '</i></div>';
+    h += '<ol' + (more ? ' start="' + (more + 1) + '" style="counter-reset:n ' + more + '"' : '') + '>' + show.map(function(t){ return '<li>' + esc(t) + '</li>'; }).join('') + '</ol>';
+    if (more && pos !== 'b') h += '<div class="more">ほか ' + more + '個</div>';
+    if (k < (s.goal || 5) && !(pos === 'b' && k)) h += '<div class="hint">何個見つかると思う？コメントで予想してね</div>';
+    return h + '</div>';
+  }
   function render(s){
     if (!s || !s.step) return;
-    var m = $('main'), meta = $('meta'), h = '';
+    var m = $('main'), meta = $('meta'), st = $('stage'), h = '';
     $('cd').hidden = s.step !== 'cd'; clearTimeout(cdT);
     if (s.step === 'cd') { var k = 3; var tick = function(){ $('cd').textContent = k; if (k-- > 1) cdT = setTimeout(tick, 650); }; tick(); return; }
+    st.classList.toggle('band', s.step === 'talk');
+    if (s.step !== 'talk') $('tst').hidden = true;
     if (s.step === 'setup') {
       meta.innerHTML = '';
-      h = '<p class="big">共通点はいくつ？</p><p class="names">' + esc((s.names || []).map(san).join(' × ')) + '</p>'
-        + '<p class="ask">コメントで予想してね：<b>' + ((s.n || 2) === 2 ? '2人の共通点は何個？' : '共通点が見つかるのは何問？') + '</b></p>';
+      var nm = esc((s.names || []).map(san).join(' × '));
+      h = s.mode === 'odai'
+        ? '<p class="big">共通点はいくつ？</p><p class="names">' + nm + '</p><p class="ask">コメントで予想してね：<b>' + ((s.n || 2) === 2 ? '2人の共通点は何個？' : '共通点が見つかるのは何問？') + '</b></p>'
+        : '<p class="big">共通点を' + (s.goal || 5) + '個さがせ</p><p class="names">' + nm + '</p><p class="ask">コメントで予想してね：<b>何個見つかると思う？</b></p>';
+    } else if (s.step === 'talk') {
+      meta.innerHTML = '';
+      h = band(s);
+      if (s.topic) h += '<div class="tp' + (s.pos === 'b' ? ' wide' : '') + '"><small>お題</small><div class="q">' + esc(s.topic.q) + '</div><div class="f">' + esc(s.topic.f) + '</div></div>';
     } else if (s.step === 'q' || s.step === 'open') {
-      meta.innerHTML = '<span><span class="band">' + (s.step === 'q' ? '答える' : 'オープン') + '</span>第' + s.qn + '問 / ' + s.total + '</span><span>共通点 <b>' + s.hits + '</b></span>';
-      h = '<div class="pack">' + esc(s.pack || '') + (s.c ? '' : '・自由に答える') + '</div><div class="q' + (s.step === 'open' ? ' sm' : '') + '">' + esc(s.q) + '</div>';
+      meta.innerHTML = '<span><span class="band-l">' + (s.step === 'q' ? '答える' : 'オープン') + '</span>' + (s.one ? 'お題' : '第' + s.qn + '問 / ' + s.total) + '</span>';
+      h = '<div class="pack">' + esc(s.pack || '') + '</div><div class="q' + (s.step === 'open' ? ' sm' : '') + '">' + esc(s.q) + '</div>';
       if (s.step === 'q') {
-        h += s.c ? '<div class="choices">' + s.c.map(function(c){ return '<span>' + esc(c) + '</span>'; }).join('') + '</div>' : '<div class="free">自由に答えるお題。オープンの合図で一斉に言ってね</div>';
-        if (s.qn === 1) h += '<p class="ask">コメントで予想してね：<b>' + (s.n === 2 ? '2人の共通点は何個？' : '共通点が見つかるのは何問？') + '</b></p>';
-      }
-      var hitSet = {}; (s.groups || []).forEach(function(g){ g.m.forEach(function(i){ hitSet[i] = 1; }); });
-      h += '<div class="players' + (s.names.length >= 5 ? ' many' : '') + '" style="' + cols(s.names.length) + '">';
-      s.names.forEach(function(n, i){
-        if (s.step === 'q') h += '<div class="pl' + (s.done[i] ? ' done' : '') + '"><span class="nm">' + esc(san(n)) + '</span><span class="st">' + (s.done[i] ? (s.uke[i] ? '受付 ' + esc(s.uke[i]) : '答えた') : '考え中') + '</span></div>';
-        else h += '<div class="pl' + (hitSet[i] ? ' hit' : '') + '"><span class="nm">' + esc(san(n)) + '</span><span class="an">' + esc(s.ans[i] || '…') + '</span></div>';
-      });
-      h += '</div>';
-      if (s.step === 'open') {
-        h += (s.groups && s.groups.length)
-          ? '<div class="verdict"><span class="k-stamp" id="vst">共通<br>点</span><span>' + esc(s.groups.map(function(g){ return '「' + g.l + '」' + (s.names.length > 2 ? g.m.length + '人' : ''); }).join('　')) + 'で同じ！</span></div>'
-          : '<div class="verdict miss">こんどは共通点なし</div>';
+        h += '<div class="choices">' + (s.c || []).map(function(c){ return '<span>' + esc(c) + '</span>'; }).join('') + '</div>';
+        h += '<div class="players" style="' + cols(s.names.length) + '">';
+        s.names.forEach(function(n, i){ h += '<div class="pl' + (s.done[i] ? ' done' : '') + '"><span class="nm">' + esc(san(n)) + '</span><span class="st">' + (s.done[i] ? (s.uke[i] ? '受付 ' + esc(s.uke[i]) : '答えた') : '考え中') + '</span></div>'; });
+        h += '</div>';
+        if (s.h) h += '<p class="ask"><b>コメントで、あなたは何派？</b></p>';
+        else if (s.qn === 1 && !s.one) h += '<p class="ask">コメントで予想してね：<b>' + (s.n === 2 ? '2人の共通点は何個？' : '共通点が見つかるのは何問？') + '</b></p>';
+      } else {
+        var hs = {}; (s.hit || []).forEach(function(g){ g.forEach(function(i){ hs[i] = 1; }); });
+        var fs = anSize(s.names.length);
+        h += '<div class="players open" style="' + cols(s.names.length) + '">';
+        s.names.forEach(function(n, i){ h += '<div class="pl' + (hs[i] ? ' hit' : '') + '"><span class="nm">' + esc(san(n)) + '</span><span class="an" style="font-size:' + fs + 'px">' + esc(s.ans[i] || '…') + '</span></div>'; });
+        h += '</div>';
+        if (!s.missing) {
+          var hit = (s.hit || []).length > 0;
+          h += '<div class="verdict">' + stamp(hit) + '<span class="tx">' + (s.rare ? '<span class="rare">レア！</span>' : '') + esc(s.verdict || '') + '</span></div>';
+          h += s.h ? '<div class="follow"><b style="color:var(--k-shu)">コメントで、あなたは何派？</b></div>' : '<div class="follow"><span>聞いてみよう</span>' + esc(s.follow || '') + '</div>';
+        }
       }
     } else if (s.step === 'result') {
-      meta.innerHTML = '<span><span class="band">結果</span>' + s.total + '問</span>';
-      var p = s.pairs || [], top = p[0] || { a: '', b: '', k: 0, l: [] };
-      h = '<div class="res"><div class="k-result"><small>' + (s.n === 2 ? esc(san(top.a)) + 'と' + esc(san(top.b)) + 'の共通点' : 'いちばん多かったペア') + '</small><b' + (s.n === 2 ? '' : ' class="pair"') + '>' + (s.n === 2 ? top.k + '個' : esc(san(top.a)) + '<br>と<br>' + esc(san(top.b))) + '</b><small>' + (s.n === 2 ? s.total + '問中' : top.k + '個 / ' + s.total + '問中') + '</small></div><ul>';
-      if (s.n === 2) h += top.l.slice(0, 8).map(function(l){ return '<li>' + esc(l) + '</li>'; }).join('') || '<li>こんどは共通点なし。ズレっぷりもまた相性</li>';
-      else { h += p.slice(0, 6).map(function(x){ return '<li><span class="rw"><span>' + esc(san(x.a)) + 'と' + esc(san(x.b)) + '</span><b>' + x.k + '個</b></span><small>' + esc(x.l.join('・')) + '</small></li>'; }).join(''); if (s.all && s.all.length) h += '<li><span class="rw"><span>全員一致</span><b>' + s.all.length + '個</b></span><small>' + esc(s.all.join('・')) + '</small></li>'; }
-      h += '</ul></div>';
+      meta.innerHTML = '<span><span class="band-l">まとめ</span></span>';
+      if (s.mode === 'talk') {
+        var it = s.items || [];
+        h = '<div class="res"><div class="k-result"><small>見つけた共通点</small><b>' + it.length + '個</b><small>目標 ' + (s.goal || 5) + '個</small></div><ul>' + (it.slice(0, 8).map(function(t){ return '<li>' + esc(t) + '</li>'; }).join('') || '<li>こんどは見つからなかった</li>') + (it.length > 8 ? '<li>ほか ' + (it.length - 8) + '個</li>' : '') + '</ul></div>';
+      } else {
+        var b = s.best;
+        h = '<div class="res"><div class="k-result"><small>' + (s.n === 2 ? esc(san(s.names[0])) + 'と' + esc(san(s.names[1])) + 'の共通点' : 'みんなの共通点') + '</small><b>' + s.hits + '個</b><small>' + s.total + '問中</small></div>'
+          + '<div class="best"><small>いちばんレアな共通点</small>' + (b ? '<b>' + esc(b.a) + '</b><span>' + esc(b.q) + (b.who ? '<br>' + esc(b.who) : '') + '</span>' : '<b>全部ズレた</b><span>ズレた話も、それはそれで。</span>') + '</div></div>';
+      }
     }
-    var stepKey = s.step + '|' + s.qn + '|' + ((s.groups || []).length);
+    var stepKey = s.step + '|' + s.qn + '|' + (s.hit || []).length + '|' + !!s.missing;
     m.innerHTML = h;
-    if (stepKey !== lastStep) { var vs = $('vst'); if (vs && window.KKit && KKit.reveal) { vs.classList.add('k-reveal-stamp'); KKit.reveal(vs); } var rs = m.querySelector('.k-result'); if (rs && window.KKit && KKit.reveal) { rs.classList.add('k-reveal'); KKit.reveal(rs); } }
+    if (stepKey !== lastStep) { reveal($('vst')); reveal(m.querySelector('.res .k-result'), 'k-reveal'); }
     lastStep = stepKey;
+    // 話しながら探す：足した瞬間の判子（帯の横に2.6秒）
+    if (s.step === 'talk' && s.stamp && s.stamp.id !== lastTs) {
+      lastTs = s.stamp.id;
+      var ts = $('tst'), pos = s.pos || 'tr';
+      ts.innerHTML = '<span class="k-stamp">共通<br>点！</span><span class="t">' + esc(s.stamp.t) + '</span>';
+      ts.style.cssText = pos === 'b' ? 'left:50%;bottom:220px;transform:translateX(-50%)' : (pos === 'br' ? 'right:620px;bottom:40px' : 'right:620px;top:40px');
+      ts.hidden = false; reveal(ts.querySelector('.k-stamp'));
+      clearTimeout(tsT); tsT = setTimeout(function(){ ts.hidden = true; }, 2600);
+    }
+    // 目標に届いたとき（1回だけ）
+    if (s.step === 'talk' && s.cel && s.cel !== lastCel) {
+      lastCel = s.cel;
+      var c = $('cel'); c.innerHTML = '<div class="k-result"><small>共通点</small><b>' + (s.goal || 5) + '個そろった！</b><small>' + esc((s.names || []).map(san).join(' × ')) + '</small></div>';
+      c.hidden = false; reveal(c.querySelector('.k-result'), 'k-reveal');
+      clearTimeout(celT); celT = setTimeout(function(){ c.hidden = true; }, 3800);
+    }
     // 回答コードを受け取ったときのハンコ（名前と受付記号だけ。答えは出さない）
-    if (s.stamp && s.stamp.id !== lastStamp) {
+    if (s.stamp && s.stamp.u && s.stamp.id !== lastStamp) {
       lastStamp = s.stamp.id;
-      var st = $('stp'); st.innerHTML = '<span class="mk">受</span><span>' + esc(s.stamp.n) + '　受け取りました　<span class="uk">受付 ' + esc(s.stamp.u) + '</span></span>';
-      st.hidden = false; clearTimeout(stT); stT = setTimeout(function(){ st.hidden = true; }, 2600);
+      var sp = $('stp'); sp.innerHTML = '<span class="mk">受</span><span>' + esc(s.stamp.n) + '　受け取りました　<span class="uk">受付 ' + esc(s.stamp.u) + '</span></span>';
+      sp.hidden = false; clearTimeout(stT); stT = setTimeout(function(){ sp.hidden = true; }, 2600);
     }
   }
   window.__kyRender = render;
   try { var ch = new BroadcastChannel('ky-view'); ch.onmessage = function(e){ render(e.data); }; } catch (e) {}
   window.addEventListener('storage', function(e){ if (e.key === 'ky-view-state') { try { render(JSON.parse(e.newValue)); } catch (_) {} } });
-  try { var s0 = JSON.parse(localStorage.getItem('ky-view-state') || 'null'); if (s0 && s0.step !== 'cd') render(s0); } catch (e) {}
+  // 開き直したとき：いまの場面だけ出す（判子・そろった演出は出し直さない）
+  try { var s0 = JSON.parse(localStorage.getItem('ky-view-state') || 'null'); if (s0 && s0.step !== 'cd') { if (s0.stamp) lastTs = lastStamp = s0.stamp.id; if (s0.cel) lastCel = s0.cel; render(s0); } } catch (e) {}
 })();
 </script>
 </body>

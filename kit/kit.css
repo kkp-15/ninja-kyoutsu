@@ -356,3 +356,6 @@ a.k-card:hover h3,a.k-card:focus-visible h3{text-decoration:underline;text-decor
   .k-countdown>span.k-on,.k-reveal.k-on,.k-reveal-fuda.k-on,.k-reveal-stamp.k-on{animation:none}
   .k-toast,.k-toast.k-on,.k-teaser,.k-stepper>button,.k-share{transition:none}
 }
+
+/* ---------- 墨の判子（k-stamp の墨色。ズレた・外れ・おしいなど、朱の判子と同じ重さで並べる用）2026-10-20 共通点探しで追加 ---------- */
+.k-stamp.k-stamp-sumi{filter:grayscale(1) brightness(.42) contrast(1.2);color:var(--k-sumi)}

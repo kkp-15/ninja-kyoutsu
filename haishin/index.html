@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>配信・実況で共通点探しをする方法｜「共通点 ◯/5」の帯をOBSに出す</title>
+<meta name="description" content="VTuber・ゲーム実況のコラボ配信で、共通点探しをする方法。話しながら見つけた共通点を一言で足すと、OBSに取り込む表示ページに「共通点 ◯/5」の帯が出ます。ブラウザだけで、登録不要。">
+<link rel="canonical" href="https://kyoutsu.kkpwebninja.com/haishin/">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:title" content="配信・実況で共通点探しをする方法">
+<meta property="og:description" content="話しながら見つけた共通点を足すと、OBSの表示ページに「共通点 ◯/5」の帯が出ます。ブラウザだけで、登録不要。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://kyoutsu.kkpwebninja.com/haishin/">
+<meta property="og:site_name" content="共通点探しゲーム">
+<meta property="og:image" content="https://kyoutsu.kkpwebninja.com/ogp.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "配信・実況で共通点探しをする方法", "datePublished": "2026-10-20", "dateModified": "2026-10-20", "author": {"@type": "Organization", "name": "web忍者の砦"}, "publisher": {"@type": "Organization", "name": "web忍者の砦"}, "mainEntityOfPage": "https://kyoutsu.kkpwebninja.com/haishin/"}</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2LM85GJN0L"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-2LM85GJN0L');
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/kit/kit.css">
+<style>
+/* 読み物ページ：地は白、本文16px・#333・行間1.7（はぁの /haishin/ と同じ形） */
+:root{--orange:#ff8a3d;--cream:#fff8f0;--ink:#333;--muted:#6b5a48;--line:#e6dccb}
+*{box-sizing:border-box}
+body{margin:0;background:#fff;color:var(--ink);font-family:"M PLUS Rounded 1c","Hiragino Maru Gothic ProN",system-ui,sans-serif;font-size:16px;line-height:1.7;-webkit-text-size-adjust:100%}
+.wrap{max-width:760px;margin:0 auto;padding:18px 16px 60px}
+h1{font-size:1.4rem;line-height:1.5;margin:.2rem 0 .4rem}
+h1 .c{display:block;font-size:1rem;color:var(--muted);font-weight:700}
+.upd{font-size:.85rem;color:var(--muted);margin:0 0 .8rem}
+.lead{margin:0 0 1rem}
+.cta{display:block;min-height:48px;text-align:center;background:var(--orange);color:#fff;font-weight:800;font-size:.95rem;padding:.75rem .5rem;border-radius:8px;text-decoration:none;margin:0 0 1.6rem}
+h2{font-size:20px;line-height:1.5;margin:0 0 .5rem;padding-left:.6rem;border-left:4px solid var(--orange)}
+.steps{margin:0 0 2rem;padding-left:1.6rem}.steps li{margin:0 0 .6rem}
+code{background:#f6efe4;padding:.05rem .35rem;border-radius:4px;font-size:.92em}
+a{color:#1565c0}
+@media(min-width:760px){h2{font-size:22px}}
+</style>
+</head>
+<body class="k-page">
+<div class="wrap">
+
+<h1>配信・実況で使う方へ<span class="c">共通点探しゲーム</span></h1>
+<p class="upd">更新日 <time datetime="2026-10-20">2026-10-20</time></p>
+<p class="lead">コラボ配信で、話しながら見つけた共通点を数えられます。見つかった共通点を一言で足すと、OBSに取り込む表示ページに「共通点 ◯/5」の帯が出ます。ゲストは何も操作しなくて大丈夫です。インストールも登録もいりません。</p>
+
+<a class="cta" href="https://kyoutsu.kkpwebninja.com/?mode=stream">配信モードで開く（無料・登録不要）</a>
+
+<h2>使い方（3段）</h2>
+<ol class="steps">
+<li><b>配信モードで開く</b>：パソコンのブラウザで <a href="https://kyoutsu.kkpwebninja.com/?mode=stream">kyoutsu.kkpwebninja.com/?mode=stream</a> を開きます。広告が出なくなります。遊び方は「話しながら探す」、名前と目標の個数（はじめは5個）を決めて「はじめる」</li>
+<li><b>表示ページをOBSに取り込む</b>：同じブラウザで <a href="https://kyoutsu.kkpwebninja.com/view/">表示ページ（/view/）</a> を開き、OBSの「ウィンドウキャプチャ」で取り込みます。帯は右上・右下・下から選べます。帯のまわりは無地なので、OBSでクロップするか、カラーキーで抜いてください（「ブラウザソース」では操作の画面とつながりません）</li>
+<li><b>見つけたら足す</b>：共通点が見つかったら、操作の画面に一言で書いて「足す」。表示ページに「共通点！」の判子が出て、帯の数が増えます。まちがえたら「取り消す」。話が詰まったら「お題を1つ出す」で、話のきっかけになるお題が表示ページに大きく出ます。目標の個数に届くと「5個そろった！」が1回だけ出ます</li>
+</ol>
+<p>お題に答えて、せーので一斉に見せ合う遊び方（「お題で探す」）もあります。離れたゲストには参加リンクを送ると、答えを選んで「回答コード」をDiscordなどで送ってもらえます。</p>
+
+<h2>配信で使うときの条件</h2>
+<p>許諾の申請はいりません。収益化もできます。配信・動画・イベントで使うときは、<a href="https://kkpwebninja.com/otoiawase" target="_blank" rel="noopener">お問い合わせ</a>か X（<a href="https://x.com/kkp_webninja" target="_blank" rel="noopener">@kkp_webninja</a>）で一言いただけると助かります。ご要望があれば、優先してアップデートします。概要欄にサイト名「web忍者の砦」とURL（https://kyoutsu.kkpwebninja.com/）を書いてください。くわしくは<a href="https://kkpwebninja.com/guidelines">配信・紹介・掲載のガイドライン</a>をご覧ください。</p>
+
+<p style="margin-top:2rem"><a class="cta" href="https://kyoutsu.kkpwebninja.com/">共通点探しゲームを開く</a></p>
+
+</div>
+<!-- WEBNINJA_UNIFIED_FOOTER -->
+<footer style="text-align:center;padding:2rem 1rem 2.5rem;font-size:0.78rem;color:#94a3b8;line-height:2;border-top:1px solid #f0e6d2;margin-top:2.5rem;background:#fffcf7;">
+  <div style="font-weight:800;color:#8b6b3d;font-size:0.85rem;margin-bottom:0.4rem;">web忍者の砦</div>
+  <div>
+    <a href="https://kkpwebninja.com/" target="_blank" rel="noopener" style="color:#8b6b3d;text-decoration:none;margin:0 0.5rem;">本丸トップ</a>·
+    <a href="https://privacypolicy.kkpwebninja.com/" target="_blank" rel="noopener" style="color:#8b6b3d;text-decoration:none;margin:0 0.5rem;">プライバシーポリシー</a>·
+    <a href="https://kkpwebninja.com/otoiawase" target="_blank" rel="noopener" style="color:#8b6b3d;text-decoration:none;margin:0 0.5rem;">お問い合わせ</a>·
+    <a href="https://x.com/kkp_webninja" target="_blank" rel="noopener" style="color:#8b6b3d;text-decoration:none;margin:0 0.5rem;">@kkp_webninja</a>
+  </div>
+  <div style="margin-top:0.5rem;color:#bfa97a;">© 2025-2026 web忍者の砦</div>
+</footer>
+</body>
+</html>

@@ -555,7 +555,8 @@ body.stream.in-game .ky-choices{grid-template-columns:1fr 1fr}
   }
   function finePointer(){ return !!(window.matchMedia && matchMedia('(pointer:fine)').matches); }
   function focusIn(){ if (finePointer() && !$('talk').hidden) setTimeout(function(){ $('tIn').focus(); }, 0); }
-  function openView(){ var w = null; try { w = window.open('/view/', 'kyView', 'popup=yes,width=1280,height=720'); } catch (e) {} if (!w) location.href = '/view/'; }
+  // 2026-10-21 ポップアップが止められたときに location.href で操作画面ごと /view/ へ移り、入れた名前が消えていた。開けないときは知らせるだけ
+  function openView(){ var w = null; try { w = window.open('/view/', 'kyView', 'popup=yes,width=1280,height=720'); } catch (e) {} if (w) { try { w.focus(); } catch (e) {} } else toast('表示ページが開けません。ポップアップを許可して、もう一度押してください', 5000); }
   [].forEach.call(document.querySelectorAll('.ky-viewopen'), function(b){ b.addEventListener('click', openView); });
   function saveCfg(){ lsSet('ky-cfg', { mode: S.mode, n: S.n, names: S.names, remote: S.remote, how: S.how, pack: S.pack, cnt: S.cnt, goal: S.goal, pos: S.pos }); }
   function nm(i){ var t = String(S.names[i] || '').trim(); return t || DEF[i]; }
@@ -1203,7 +1204,7 @@ body.stream.in-game .ky-choices{grid-template-columns:1fr 1fr}
           out.innerHTML = '<div class="ky-big"><small>せーので画面を見せてね</small><b>' + esc(pick === -1 ? 'とばす' : cs[pick]) + '</b></div>';
         }
       }
-      $('gHint').textContent = P.s === 1 ? host + 'が「第' + (G.qi + 1) + '問」を出したら答えてね。先の問題までまとめて送ってもOK。' : '答えたら、みんなでせーので画面を見せ合おう。';
+      $('gHint').textContent = P.s === 1 ? host + 'が「第' + (G.qi + 1) + '問」を出したら答えて、その問題のコードを送ってね（1問ずつ）。' : '答えたら、みんなでせーので画面を見せ合おう。';
     }
     $('gPrev').onclick = function(){ if (G.qi > 0) { G.qi--; save(); draw(); window.scrollTo(0, 0); } };
     $('gNext').onclick = function(){ if (G.qi < P.q.length - 1) { G.qi++; save(); draw(); window.scrollTo(0, 0); } };

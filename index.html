@@ -549,18 +549,18 @@ body.stream.in-game .ky-choices{grid-template-columns:1fr 1fr}
   var SCREEN = 'setup', UNDO = null, EDIT = 0;
   // 遊んでいる途中の中身を、この端末に置いておく（再読み込み・ブラウザが落ちても続きから。どこにも送らない）。kit の KKit.resume（下の「続きから」で作る）
   var RUN_KEY = 'ky-run';
-  var RES = { pending: false, save: function(){}, clear: function(){} };
+  var RES = { pending: false, save: function(){}, clear: function(){}, dismiss: function(){ return false; } };
   function saveRun(){
     if (SCREEN === 'setup' || RES.pending) return;   // 選ぶまでは前回の続きを消さない
     RES.save({ screen: SCREEN, mode: S.mode,
       T: { items: T.items, topics: T.topics, ti: T.ti, topic: T.topic, cel: T.cel, uid: T.uid },
       S: { g: S.g, gsig: S.gsig, r: S.r, qs: S.qs, nc: S.nc, qi: S.qi, a: S.a, phase: S.phase, rv: S.rv, one: S.one, ag: S.ag } });
   }
-  // 続きからを選ばずに始めたら、前回の分は消す（表示ページへの送りも止めたままにしない）
-  function dropResume(){ if (!RES.pending) return; var d = document.querySelector('#resumeBox [data-k-del]'); if (d) d.click(); }
+  // 続きからを選ばずに始めたら、前回の分は消す（箱を隠す・記録を消す・表示ページへの送りを戻す。kit の R.dismiss）
+  function dropResume(){ RES.dismiss(); }
   function finePointer(){ return !!(window.matchMedia && matchMedia('(pointer:fine)').matches); }
   function focusIn(){ if (finePointer() && !$('talk').hidden) setTimeout(function(){ $('tIn').focus(); }, 0); }
-  // 表示ページは kit の KKit.openView（別窓 1280x720・背景は設定の3択）。開けないときは知らせるだけ（操作画面は動かさない）
+  // 表示ページは kit の KKit.openView（別窓 1280x720・背景は設定の6つ）。開けないときは知らせるだけ（操作画面は動かさない）
   function openView(){ if (!KKit.openView({ url: '/view/', ch: 'ky-view', name: 'kyView' })) toast('表示ページが開けません。ポップアップを許可して、もう一度押してください', 5000); }
   [].forEach.call(document.querySelectorAll('.ky-viewopen'), function(b){ b.addEventListener('click', openView); });
   function saveCfg(){ lsSet('ky-cfg', { mode: S.mode, n: S.n, names: S.names, remote: S.remote, how: S.how, pack: S.pack, cnt: S.cnt, goal: S.goal, pos: S.pos }); }
@@ -704,6 +704,7 @@ body.stream.in-game .ky-choices{grid-template-columns:1fr 1fr}
   // ===== 画面の切りかえ =====
   function show(id){
     ['setup','talk','play','result'].forEach(function(s){ $(s).hidden = s !== id; });
+    if (SCREEN !== id && window.KKit && KKit.twice.block) KKit.twice.block();   // 切り替えた直後の押し（前の場面の連打）は2回押しに数えない
     SCREEN = id; if (id !== 'setup') saveRun();
     document.body.classList.toggle('in-game', id !== 'setup');
     $('about').hidden = STREAM || id !== 'setup';

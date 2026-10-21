@@ -124,6 +124,10 @@ h1.ky-h1{margin:24px 0 8px;font-family:var(--k-brush);font-weight:400;font-size:
 .ky-packs .k-seg>button{flex-basis:33.34%}
 .ky-stream{margin:24px 0;padding:12px 0;border-top:2px solid var(--k-sumi);border-bottom:1px solid var(--k-line-soft)}
 .ky-stream h2{margin:0 0 4px;font-size:16px}
+.ky-cmp{margin:6px 0 4px;display:grid;gap:4px}
+.ky-cmp div{display:grid;grid-template-columns:6.5em 1fr;gap:8px;align-items:baseline}
+.ky-cmp dt{font-weight:800;font-size:15px;color:var(--k-sumi)}
+.ky-cmp dd{margin:0;font-size:14px;line-height:1.55;color:var(--k-text-2)}
 .ky-stream a{color:var(--k-sumi);font-weight:700}
 
 /* ---- お題で探す ---- */
@@ -330,6 +334,11 @@ body.stream.in-game .ky-choices{grid-template-columns:1fr 1fr}
     <!-- 配信モード（PC幅768以上だけ表示） -->
     <div class="ky-stream" id="streamBox" hidden>
       <h2>配信で使う</h2>
+      <!-- 2026-10-21 ふつうと配信モードの見比べ（2行だけ） -->
+      <dl class="ky-cmp">
+        <div><dt>ふつう</dt><dd>同じ部屋でスマホを回して遊ぶ／広告は区切りのあとだけ</dd></div>
+        <div><dt>配信モード</dt><dd>PCで進めて OBS に映す／広告なし／答えは映さない／離れたゲストは回答コード</dd></div>
+      </dl>
       <p class="ky-note" id="streamOff">配信モードにすると広告が消え、OBSに取り込む表示ページ（/view/）に共通点の数が出ます。<br><button type="button" class="k-btn k-btn-sub" id="streamGo" style="margin-top:8px">配信モードにする</button></p>
       <p class="ky-note" id="streamOn" hidden>配信モード中（広告なし）。OBSには、このブラウザで開いた表示ページを「ウィンドウキャプチャ」で取り込み、フィルタの「クロマキー」で緑を抜きます。表示ページは最小化しないでください。<br><button type="button" class="k-btn k-btn-sub ky-viewopen" style="margin:8px 0">表示ページを別ウィンドウで開く</button><br><a href="/haishin/">使い方</a>　<a href="/?mode=normal">配信モードをやめる</a></p>
     </div>

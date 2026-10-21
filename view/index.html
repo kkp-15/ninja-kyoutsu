@@ -22,6 +22,7 @@ html,body{margin:0;height:100%;overflow:hidden;background:var(--k-kinari)}
 /* 話しながら探す：帯だけ。まわりは緑（OBSの「クロマキー」フィルタで抜く。初期値の緑のままで抜ける） */
 html.band,html.band body,#stage.band{background:#00ff00}
 #stage.band{padding:0}
+#stage.empty .top{display:none}
 #stage.band .top{display:none}
 .top{display:flex;align-items:center;justify-content:space-between;gap:24px;padding-bottom:16px;border-bottom:4px solid var(--k-sumi)}
 .top .ttl{font-family:var(--k-brush);font-size:44px;letter-spacing:.06em}
@@ -32,10 +33,10 @@ html.band,html.band body,#stage.band{background:#00ff00}
 .q{font-family:var(--k-bold);font-size:76px;line-height:1.2;letter-spacing:.03em;word-break:auto-phrase;text-wrap:balance}
 .q.sm{font-size:54px}
 .choices{display:flex;flex-wrap:wrap;gap:16px;margin-top:28px}
-.choices span{padding:10px 26px;border:3px solid var(--k-sumi);border-radius:8px;background:#fff;font-size:42px;font-weight:800}
+.choices .k-tag{margin:0;padding:8px 24px;border-width:3px;border-radius:8px;font-size:42px;font-weight:800;line-height:1.3;letter-spacing:.02em}
 .players{display:grid;gap:16px;margin-top:28px}
 .players.open{flex:1;min-height:0;margin-top:20px}
-.pl{position:relative;display:flex;flex-direction:column;justify-content:center;padding:14px 22px;border:3px solid var(--k-sumi);border-radius:8px;background:#fff;min-width:0;min-height:0;overflow:hidden}
+.pl{position:relative;display:flex;flex-direction:column;justify-content:center;padding:14px 22px;border:3px solid var(--k-sumi);border-radius:8px;min-width:0;min-height:0;overflow:hidden}
 .pl .nm{display:block;font-size:42px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .pl .st{display:block;font-family:var(--k-bold);font-size:42px;color:var(--k-text-2)}
 .pl.done .st{color:var(--k-shu)}
@@ -109,13 +110,13 @@ html.band,html.band body,#stage.band{background:#00ff00}
 .tp small{display:block;font-size:42px;font-weight:800;color:var(--k-text-2)}
 .tp .q{margin-top:6px;font-size:66px}
 .tp .f{margin-top:14px;font-size:42px;font-weight:800}
-#cel{position:absolute;inset:0;display:grid;place-items:center;background:rgba(251,243,228,.88)}
-#stage.band #cel{background:transparent}
-#stage.band #cel .k-result{background:#fff;border:5px solid var(--k-sumi);border-radius:10px}
-#cel .k-result{min-width:820px;padding:20px 0}
-#cel .k-result b{font-size:120px}
+/* 目標に届いた知らせ：帯（右上・右下・下）に重ねず、帯のない所に巻物（k-result）で出す（2026-10-21） */
+#cel{position:absolute;left:32px;bottom:32px;width:790px}
+#cel.at-b{left:50%;bottom:auto;top:50%;width:980px;transform:translate(-50%,-62%)}
+#cel .k-result{padding:16px 0}
+#cel .k-result b{font-size:96px;white-space:nowrap}
+#cel.at-b .k-result b{font-size:120px}
 #cel .k-result small{font-size:42px}
-#cd{position:absolute;inset:0;display:grid;place-items:center;background:rgba(251,243,228,.92);font-family:var(--k-bold);font-size:300px;color:var(--k-shu);text-shadow:var(--k-outline)}
 #stp{position:absolute;right:56px;top:140px;display:flex;align-items:center;gap:20px;padding:18px 28px;border:4px solid var(--k-shu);border-radius:8px;background:#fff;font-size:42px;font-weight:800;transform:rotate(-2deg)}
 #stp .mk{display:grid;place-items:center;width:80px;height:80px;background:url(/kit/img/d4-hanko.webp) center/100% 100% no-repeat;font-family:var(--k-head);font-weight:800;font-size:42px;color:var(--k-shu)}
 #stp .uk{color:var(--k-shu);font-family:var(--k-bold)}
@@ -127,12 +128,11 @@ html.band,html.band body,#stage.band{background:#00ff00}
 </style>
 </head>
 <body>
-<div id="stage">
+<div id="stage" class="empty">
   <div class="top"><span class="ttl">共通点探し</span><span class="meta" id="meta"></span></div>
   <div class="main" id="main"><p class="big">共通点探し</p><p class="ask">操作ページ（同じブラウザ）で配信モードにすると、ここに場面が出ます。</p></div>
   <div id="tst" hidden></div>
   <div id="cel" hidden></div>
-  <div id="cd" hidden></div>
   <div id="stp" hidden></div>
 </div>
 <script>
@@ -171,8 +171,10 @@ html.band,html.band body,#stage.band{background:#00ff00}
   function render(s){
     if (!s || !s.step) return;
     var m = $('main'), meta = $('meta'), st = $('stage'), h = '';
-    $('cd').hidden = s.step !== 'cd'; clearTimeout(cdT);
-    if (s.step === 'cd') { var k = 3; var tick = function(){ $('cd').textContent = k; if (k-- > 1) cdT = setTimeout(tick, 650); }; tick(); return; }
+    // せーので オープン：3・2・1 は kit の k-countdown（操作ページと同じ）
+    if (cdT && cdT.stop) { cdT.stop(); cdT = 0; }
+    if (s.step === 'cd') { if (window.KKit && KKit.countdown) cdT = KKit.countdown(3, { step: 650 }); return; }
+    st.classList.remove('empty');
     var isBand = s.step === 'talk' || (s.step === 'setup' && s.mode !== 'odai');
     st.classList.toggle('band', isBand); document.documentElement.classList.toggle('band', isBand);
     if (s.step !== 'talk') $('tst').hidden = true;
@@ -195,9 +197,9 @@ html.band,html.band body,#stage.band{background:#00ff00}
       meta.innerHTML = '<span><span class="band-l">' + (s.step === 'q' ? '答える' : 'オープン') + '</span>' + (s.one ? 'お題' : '第' + s.qn + '問 / ' + s.total) + '</span>';
       h = '<div class="pack">' + esc(s.pack || '') + '</div><div class="q' + (s.step === 'open' ? ' sm' : '') + '">' + esc(s.q) + '</div>';
       if (s.step === 'q') {
-        h += '<div class="choices">' + (s.c || []).map(function(c){ return '<span>' + esc(c) + '</span>'; }).join('') + '</div>';
+        h += '<div class="choices">' + (s.c || []).map(function(c){ return '<span class="k-tag">' + esc(c) + '</span>'; }).join('') + '</div>';
         h += '<div class="players" style="' + cols(s.names.length) + '">';
-        s.names.forEach(function(n, i){ h += '<div class="pl' + (s.done[i] ? ' done' : '') + '"><span class="nm">' + esc(san(n)) + '</span><span class="st">' + (s.done[i] ? (s.uke[i] ? '受付 ' + esc(s.uke[i]) : '答えた') : '考え中') + '</span></div>'; });
+        s.names.forEach(function(n, i){ h += '<div class="pl k-paper' + (s.done[i] ? ' done' : '') + '"><span class="nm">' + esc(san(n)) + '</span><span class="st">' + (s.done[i] ? (s.uke[i] ? '受付 ' + esc(s.uke[i]) : '答えた') : '考え中') + '</span></div>'; });
         h += '</div>';
         if (s.h) h += '<p class="ask"><b>コメントで、あなたは何派？</b></p>';
         else if (s.qn === 1 && !s.one) h += '<p class="ask">コメントで予想してね：<b>' + (s.n === 2 ? '2人の共通点は何個？' : '共通点が見つかるのは何問？') + '</b></p>';
@@ -205,7 +207,7 @@ html.band,html.band body,#stage.band{background:#00ff00}
         var hs = {}; (s.hit || []).forEach(function(g){ g.forEach(function(i){ hs[i] = 1; }); });
         var fs = anSize(s.names.length);
         h += '<div class="players open" style="' + cols(s.names.length) + '">';
-        s.names.forEach(function(n, i){ h += '<div class="pl' + (hs[i] ? ' hit' : '') + '"><span class="nm">' + esc(san(n)) + '</span><span class="an" style="font-size:' + fs + 'px">' + esc(s.ans[i] || '…') + '</span></div>'; });
+        s.names.forEach(function(n, i){ h += '<div class="pl k-paper' + (hs[i] ? ' hit' : '') + '"><span class="nm">' + esc(san(n)) + '</span><span class="an" style="font-size:' + fs + 'px">' + esc(s.ans[i] || '…') + '</span></div>'; });
         h += '</div>';
         if (!s.missing) {
           var hit = (s.hit || []).length > 0;
@@ -240,7 +242,7 @@ html.band,html.band body,#stage.band{background:#00ff00}
     // 目標に届いたとき（1回だけ）
     if (s.step === 'talk' && s.cel && s.cel !== lastCel) {
       lastCel = s.cel;
-      var c = $('cel'); c.innerHTML = '<div class="k-result"><small>共通点</small><b>' + (s.goal || 5) + '個そろった！</b><small>' + esc((s.names || []).map(san).join(' × ')) + '</small></div>';
+      var c = $('cel'); c.className = (s.pos || 'tr') === 'b' ? 'at-b' : ''; c.innerHTML = '<div class="k-result"><small>共通点</small><b>' + (s.goal || 5) + '個そろった！</b><small>' + esc((s.names || []).map(san).join(' × ')) + '</small></div>';
       c.hidden = false; reveal(c.querySelector('.k-result'), 'k-reveal');
       clearTimeout(celT); celT = setTimeout(function(){ c.hidden = true; }, 3800);
     }

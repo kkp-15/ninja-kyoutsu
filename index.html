@@ -218,6 +218,14 @@ h1.ky-h1{margin:24px 0 8px;font-family:var(--k-brush);font-weight:400;font-size:
 .ky-best b{display:block;margin-top:4px;font-family:var(--k-bold);font-weight:400;font-size:22px;line-height:1.35;color:var(--k-shu)}
 .ky-best span{display:block;font-size:14px;line-height:1.6}
 .ky-res .k-table-result td,.ky-res .k-table-result th{font-size:15px}
+/* 各問の結果（共通点の行は小さな判子） */
+.ky-qlist{margin:16px 0 0}
+.ky-qlist tbody>tr>td:first-child{min-width:0;width:2.2em;padding-right:0;color:var(--k-text-2)}
+.ky-qlist td small{display:block;font-size:14px;line-height:1.5;color:var(--k-text-2)}
+.ky-qlist tr.k-win td small{color:var(--k-sumi)}
+.ky-qlist td.k-r{width:64px;vertical-align:middle;text-align:center}
+.ky-qlist .k-stamp{width:48px;height:48px;font-size:14px;line-height:1.05}
+.ky-qlist .zure{font-size:14px;font-weight:700;color:var(--k-text-2)}
 .ky-ad{margin:32px 0 8px}
 
 /* 回答画面（ゲストのスマホ） */
@@ -1057,10 +1065,22 @@ body.stream.in-game .ky-choices{grid-template-columns:1fr 1fr}
     var b = R.best, o = BYID[S.qs[b.q]];
     return { a: chs(b.q)[b.g.c], q: o.q, who: S.n === 2 ? '' : b.g.m.map(function(i){ return san(nm(i)); }).join('・'), rare: b.rare };
   }
+  // 各問の結果の一覧（共通点／ズレ）
+  function qListHtml(total){
+    if (!total) return '';
+    var rows = '';
+    for (var q = 0; q < total; q++) {
+      var o = BYID[S.qs[q]]; if (!o) continue;
+      var gs = groupsOf(q), hit = gs.length > 0;
+      rows += '<tr' + (hit ? ' class="k-win"' : '') + '><td class="k-num">' + (q + 1) + '</td><td>' + esc(o.q) + '<small>' + esc(verdictText(q, gs)) + '</small></td><td class="k-r">' + (hit ? '<span class="k-stamp">共通</span>' : '<span class="zure">ズレ</span>') + '</td></tr>';
+    }
+    return '<table class="k-table-result ky-qlist"><caption>各問の結果</caption><tbody>' + rows + '</tbody></table>';
+  }
   function showResult(){
     var R = resultData(), B = bestText(R), h = '';
     h += '<div class="k-result"><small>' + (S.n === 2 ? esc(san(nm(0))) + 'と' + esc(san(nm(1))) + 'の' : 'みんなの') + '共通点</small><b class="k-num">' + R.hitQ + '個</b><small>' + R.total + '問中</small></div>';
     h += '<div class="ky-best"><small>いちばんレアな共通点</small>' + (B ? '<b>' + esc(B.a) + '</b><span>' + esc(B.q) + (B.who ? '　' + esc(B.who) : '') + '</span>' : '<b>こんどは全部ズレた</b><span>ズレた答えの話も、それはそれで盛り上がります。</span>') + '</div>';
+    h += qListHtml(R.total);
     if (S.n >= 3 && !Object.keys(S.ag || {}).length) {
       h += '<details class="k-fold" style="margin-top:16px"><summary>ペアごとの共通点</summary><div><table class="k-table-result"><tbody>' + R.pairs.map(function(p){ return '<tr><td>' + esc(san(nm(p.i))) + 'と' + esc(san(nm(p.j))) + '<br><small>' + esc(p.hits.join('・')) + '</small></td><td class="k-r k-num">' + p.hits.length + '個</td></tr>'; }).join('') + '</tbody></table></div></details>';
     }

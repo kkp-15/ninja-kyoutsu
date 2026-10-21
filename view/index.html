@@ -81,9 +81,10 @@ html.band,html.band body,#stage.band{background:#00ff00}
 .bd .more{font-size:42px;color:var(--k-text-2);font-weight:800}
 .bd .hint{margin-top:10px;font-size:42px;line-height:1.3;font-weight:800;color:var(--k-text-2)}
 .bd.b .hint{margin:0;flex:none}
-.tp{position:absolute;box-sizing:border-box;left:32px;top:32px;width:940px;padding:28px 34px;background:#fff;border:5px solid var(--k-sumi);border-radius:10px}
+/* 右の帯（right:32px・幅720px）と重ならない幅にする：1600-32-720-24-32=792 */
+.tp{position:absolute;box-sizing:border-box;left:32px;top:32px;width:790px;padding:28px 34px;background:#fff;border:5px solid var(--k-sumi);border-radius:10px}
 .tp.wide{left:50%;transform:translateX(-50%);width:1200px}
-.tp.one{width:800px}
+.tp.one{width:790px}
 .tp.one.wide{width:1200px}
 .tp .ch{display:flex;flex-wrap:wrap;gap:12px;margin-top:16px}
 .tp .ch span{padding:6px 18px;border:3px solid var(--k-sumi);border-radius:8px;font-size:42px;font-weight:800}
@@ -96,6 +97,13 @@ html.band,html.band body,#stage.band{background:#00ff00}
 .tp .ans.many li{grid-template-columns:1fr;gap:0;padding:6px 0;font-size:42px}
 .tp .ans.many li .a{font-size:42px;-webkit-line-clamp:1}
 .tp .ans li.hit .a{color:var(--k-shu)}
+/* 下の帯のとき（横長の札）：4人以上は3列にして、帯にかからない高さに収める */
+.tp.wide .ans.many{grid-template-columns:repeat(3,minmax(0,1fr))}
+.tp.wide{padding:18px 34px}
+.tp.wide .ans li{line-height:1.15}
+.tp.wide .ans li,.tp.wide .ans.many li{padding:4px 0}
+.tp.wide .vd{margin-top:8px}
+.tp.wide .vd .k-stamp{width:100px;height:100px}
 .tp .vd{display:flex;align-items:center;gap:22px;margin-top:12px;font-size:42px;font-weight:800;line-height:1.25}
 .tp .vd .k-stamp{flex:none;width:112px;height:112px;font-size:42px;line-height:1.05;text-align:center}
 .tp small{display:block;font-size:42px;font-weight:800;color:var(--k-text-2)}

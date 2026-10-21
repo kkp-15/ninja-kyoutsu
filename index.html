@@ -339,8 +339,8 @@ body.stream.in-game .ky-choices{grid-template-columns:1fr 1fr}
         <div><dt>ふつう</dt><dd>同じ部屋でスマホを回して遊ぶ／広告は区切りのあとだけ</dd></div>
         <div><dt>配信モード</dt><dd>PCで進めて OBS に映す／広告なし／答えは映さない／離れたゲストは回答コード</dd></div>
       </dl>
-      <p class="ky-note" id="streamOff">配信モードにすると広告が消え、OBSに取り込む表示ページ（/view/）に共通点の数が出ます。<br><button type="button" class="k-btn k-btn-sub" id="streamGo" style="margin-top:8px">配信モードにする</button></p>
-      <p class="ky-note" id="streamOn" hidden>配信モード中（広告なし）。OBSには、このブラウザで開いた表示ページを「ウィンドウキャプチャ」で取り込み、フィルタの「クロマキー」で緑を抜きます。表示ページは最小化しないでください。<br><button type="button" class="k-btn k-btn-sub ky-viewopen" style="margin:8px 0">表示ページを別ウィンドウで開く</button><br><a href="/haishin/">使い方</a>　<a href="/?mode=normal">配信モードをやめる</a></p>
+      <p class="ky-note" id="streamOff">広告が消え、OBS用の表示ページ（/view/）に共通点の数が出ます。<br><button type="button" class="k-btn k-btn-sub" id="streamGo" style="margin-top:8px">配信モードにする</button></p>
+      <p class="ky-note" id="streamOn" hidden>配信モード中（広告なし）。表示ページをOBSの「ウィンドウキャプチャ」で取り込み、「クロマキー」で緑を抜きます。最小化はしないでください。<br><button type="button" class="k-btn k-btn-sub ky-viewopen" style="margin:8px 0">表示ページを別ウィンドウで開く</button><br><a href="/haishin/">使い方</a>　<a href="/?mode=normal">配信モードをやめる</a></p>
     </div>
 
     <div class="ky-start k-fix"><button type="button" class="k-btn k-btn-main" id="startBtn">はじめる</button></div>
@@ -417,10 +417,10 @@ body.stream.in-game .ky-choices{grid-template-columns:1fr 1fr}
   <!-- ===== 読みもの（ふだんのモードだけ） ===== -->
   <article class="ky-about" id="about">
     <h2 class="k-h2">共通点探しゲームの遊び方</h2>
-    <p><b>話しながら探す</b>：目標の個数（はじめは5個）を決めて、ふつうに話します。共通点が見つかったら一言で書いて「足す」。話が詰まったら「お題を1つ出す」を押すと、話のきっかけになるお題が出ます。</p>
-    <p><b>お題で探す</b>：お題に出る答えから1つ選び、せーので見せ合います。同じなら「共通点！」、分かれたら「ズレた！」。めずらしい答えで一致すると「レア！」が付きます。最後に共通点の数と、いちばんレアな共通点が出ます。</p>
-    <p>お題は浅いものから少しずつ深いものへ進みます。選ぶ答えの数は人数に合わせて変わります。聞かれたくないお題は「とばす」を選べます。</p>
-    <p><b>学級や研修のアイスブレイクで</b>：2人組で3分、見つけたら座る→4人組で3分、のように人数を少しずつ増やすと進めやすくなります。「見ればわかること（髪の色・服など）」と「だれでも同じこと（どちらも人間）」は数えない、と先に決めておきます。話が詰まった組には「お題を1つ出す」のお題を読み上げてください。最後に「感じたこと・気づいたこと」を話してもらうときは、話さなくてもよいことにします。</p>
+    <p><b>話しながら探す</b>：目標の個数（はじめは5個）を決めて、ふつうに話します。見つけた共通点を一言で書いて「足す」。話が詰まったら「お題を1つ出す」で、きっかけのお題が出ます。</p>
+    <p><b>お題で探す</b>：答えを1つ選び、せーので見せ合います。同じなら「共通点！」、分かれたら「ズレた！」。めずらしい答えでそろうと「レア！」。最後に共通点の数と、いちばんレアな共通点が出ます。</p>
+    <p>お題は浅いものから少しずつ深くなります。答えの数は人数に合わせて変わり、聞かれたくないお題は「とばす」でとばせます。</p>
+    <p><b>学級や研修のアイスブレイクで</b>：人数を少しずつ増やすと進めやすくなります（2人組で3分→4人組で3分）。「見ればわかること（髪の色・服など）」と「だれでも同じこと」は数えない、と先に決めます。詰まった組には「お題を1つ出す」のお題を読み上げます。最後に感想を聞くときは、話さなくてもよいことにします。</p>
 
     <h2 class="k-h2">お題の例</h2>
     <ul class="ky-ex" id="exList"></ul>
@@ -1028,7 +1028,7 @@ body.stream.in-game .ky-choices{grid-template-columns:1fr 1fr}
     if (!$('joinBox').open) { fitSoon(); return; }
     var u = joinUrl();
     loadQR(function(){ var q = qrcode(0, 'L'); q.addData(u); q.make(); $('qrBox').innerHTML = q.createSvgTag({ cellSize: 4, margin: 8, scalable: false }); });
-    $('joinNote').textContent = STREAM ? 'このリンクをDiscordなどでゲストに送ります。開くと名前を選んで答える画面になり、答えると回答コードが出ます。「もう1回」のときはリンクも送り直してください。' : 'QRを読むと、自分の名前を選んで答える画面が開きます。答えたら、せーので画面を見せ合ってね。';
+    $('joinNote').textContent = STREAM ? 'このリンクをDiscordなどでゲストに送ります。答えると回答コードが出ます。「もう1回」のときは送り直してください。' : 'QRを読むと、自分の名前を選んで答える画面が開きます。答えたら、せーので画面を見せ合ってね。';
     fitSoon();
   });
   $('joinCopy').addEventListener('click', function(){ copyText('共通点探しの参加リンク: ' + joinUrl(), 'リンクをコピーしました'); });
@@ -1183,7 +1183,7 @@ body.stream.in-game .ky-choices{grid-template-columns:1fr 1fr}
           out.innerHTML = '<div class="ky-big"><small>せーので画面を見せてね</small><b>' + esc(pick === -1 ? 'とばす' : cs[pick]) + '</b></div>';
         }
       }
-      $('gHint').textContent = P.s === 1 ? host + 'が「第' + (G.qi + 1) + '問」を出したら答えてね。先の問題まで答えて、まとめてコードを送ってもOK。' : '答えたら、みんなでせーので画面を見せ合おう。';
+      $('gHint').textContent = P.s === 1 ? host + 'が「第' + (G.qi + 1) + '問」を出したら答えてね。先の問題までまとめて送ってもOK。' : '答えたら、みんなでせーので画面を見せ合おう。';
     }
     $('gPrev').onclick = function(){ if (G.qi > 0) { G.qi--; save(); draw(); window.scrollTo(0, 0); } };
     $('gNext').onclick = function(){ if (G.qi < P.q.length - 1) { G.qi++; save(); draw(); window.scrollTo(0, 0); } };

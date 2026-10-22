@@ -340,12 +340,12 @@ body.stream.in-game .ky-choices{grid-template-columns:1fr 1fr}
       <h2>配信で使う</h2>
       <!-- 2026-10-21 ふつうと配信モードの見比べ（2行だけ） -->
       <dl class="ky-cmp">
-        <div><dt>ふつう</dt><dd>同じ部屋でスマホを回して遊ぶ／広告は区切りのあとだけ</dd></div>
-        <div><dt>配信モード</dt><dd>PCで進めて OBS に映す／広告なし／答えは映さない／離れたゲストは回答コード</dd></div>
+        <div><dt>ふつう</dt><dd>同じ部屋でスマホを回して遊ぶ</dd></div>
+        <div><dt>配信モード</dt><dd>PCで進めて OBS に映す／答えは映さない／離れたゲストは回答コード</dd></div>
       </dl>
-      <p class="ky-note" id="streamOff">広告が消え、OBS用の表示ページ（/view/）に共通点の数が出ます。<br><button type="button" class="k-btn k-btn-sub" id="streamGo" style="margin-top:8px">配信モードにする</button></p>
+      <p class="ky-note" id="streamOff">OBS用の表示ページ（/view/）に共通点の数が出ます。<br><button type="button" class="k-btn k-btn-sub" id="streamGo" style="margin-top:8px">配信モードにする</button></p>
       <div id="streamOn" hidden>
-        <p class="ky-note">配信モード中（広告なし）。OBS には表示ページを映します。最小化はしないでください。</p>
+        <p class="ky-note">配信モード中。OBS には表示ページを映します。最小化はしないでください。</p>
         <div class="ky-sub"><span class="ky-lbl">タイトル</span><label class="k-stream-title" id="titleBox"><input type="text" maxlength="12" autocomplete="off" enterkeyhint="done" placeholder="みんな" aria-label="タイトルの名前の部分"><span>の共通点探し</span></label></div>
         <div class="ky-sub ky-vo k-view-open" id="viewOpen" data-k-view="/view/" data-k-ch="ky-view" data-k-name="kyView"></div>
         <p class="ky-note ky-vlinks"><span class="k-live" data-k-live="ky-view">表示ページ：つながっていません</span><a href="/haishin/">使い方</a><button type="button" class="ky-linkbtn" id="streamStop">配信モードをやめる</button></p>
@@ -573,7 +573,7 @@ body.stream.in-game .ky-choices{grid-template-columns:1fr 1fr}
 
   if (STREAM) {
     document.body.classList.add('stream');
-    $('modeTag').textContent = '配信モード（広告なし）';
+    $('modeTag').textContent = '配信モード';
     $('posBox').hidden = false; $('playLive').hidden = false;
     TITLE = KKit.streamTitle('#titleBox', { key: 'ky-title', onChange: function(){ if (SCREEN === 'setup') setupView(); else if (SCREEN === 'talk') talkView(); else if (SCREEN === 'play') pushView(); } });
   }

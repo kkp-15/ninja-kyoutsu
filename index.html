@@ -152,6 +152,17 @@ h1.ky-h1{margin:24px 0 8px;font-family:var(--k-brush);font-weight:400;font-size:
 .ky-open .nm{display:block;font-size:14px;font-weight:700;color:var(--k-text-2)}
 .ky-open .an{display:block;font-family:var(--k-bold);font-size:22px;line-height:1.3}
 .ky-open li.hit .an{color:var(--k-shu)}
+/* 2026-10-23 自分でめくる：伏せた答え（押すとその人の答えが出る） */
+.ky-open li.back{padding:6px 0}
+.ky-flip{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;min-height:52px;padding:6px 12px;border:2px dashed #c8a77f;border-radius:var(--k-r,6px);background:repeating-linear-gradient(45deg,#fbf1e2 0 6px,#f4e4cc 6px 12px);color:#a8501a;font:inherit;text-align:left;cursor:pointer}
+.ky-flip .nm{color:#6b5a48}
+.ky-flip .an{font-size:22px}
+.ky-flip:hover{border-color:var(--k-shu)}
+.ky-flip:focus-visible{outline:3px solid var(--k-shu);outline-offset:2px}
+.ky-open li.fresh .an{animation:kyFl .35s cubic-bezier(.3,1.6,.5,1) both}
+@keyframes kyFl{0%{transform:scale(.6);opacity:0}100%{transform:none;opacity:1}}
+@media (prefers-reduced-motion:reduce){.ky-open li.fresh .an{animation:none}}
+.ky-flipall{min-height:48px;margin:0}
 .ky-open li.wait{display:flex;align-items:baseline;gap:12px;padding:6px 0}
 .ky-open li.wait .an{font-family:var(--k-body);font-size:14px;font-weight:700;color:var(--k-text-2)}
 .ky-open .set{margin-top:6px}
@@ -284,6 +295,10 @@ body.stream.in-game .ky-playgrid{display:grid;grid-template-columns:1.25fr 1fr;g
 body.stream.in-game .ky-q p{font-size:30px}
 body.stream.in-game .ky-choices{grid-template-columns:1fr 1fr}
 body.stream.in-game .ky-pos .k-seg>button{min-height:44px}
+/* 2026-10-23 自分でめくる：名前の札を2列に（伏せた札も答えも1画面に） */
+body.stream.in-game .ky-open.man{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:16px}
+body.stream.in-game .ky-open.man>li{min-width:0}
+body.stream.in-game .ky-open.man .nm{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
 /* ---- 2026-10-23 配信モードの始める前（設定）も1画面に（スクロールなし・縮めない） ----
    左の段＝遊び方・人数と名前、右の段＝お題の種類・問題数・配信の設定・「はじめる」（ふつうのモードは今のまま）
@@ -363,6 +378,13 @@ body.stream.in-game .ky-pos .k-seg>button{min-height:44px}
         <div class="k-seg k-seg-2" role="group" id="howSeg">
           <button type="button" data-how="pass">スマホ1台を回す</button>
           <button type="button" data-how="each">各自のスマホで</button>
+        </div>
+      </div>
+      <!-- 2026-10-23 答えの出し方（この端末に覚える・配信とふだんで別）。最初は 配信＝自分でめくる／ふだん＝せーので全員 -->
+      <div class="ky-sub" id="flipSec">
+        <div class="k-seg k-seg-2" role="group" id="flipSeg" aria-label="答えの出し方">
+          <button type="button" data-flip="man">自分でめくる<small>押した人の答えから出る</small></button>
+          <button type="button" data-flip="auto">せーので全員<small>3・2・1 で一度に出る</small></button>
         </div>
       </div>
     </div>
@@ -608,7 +630,7 @@ body.stream.in-game .ky-pos .k-seg>button{min-height:44px}
     if (SCREEN === 'setup' || RES.pending) return;   // 選ぶまでは前回の続きを消さない
     RES.save({ screen: SCREEN, mode: S.mode,
       T: { items: T.items, topics: T.topics, ti: T.ti, topic: T.topic, cel: T.cel, uid: T.uid },
-      S: { g: S.g, gsig: S.gsig, r: S.r, qs: S.qs, nc: S.nc, qi: S.qi, a: S.a, phase: S.phase, rv: S.rv, one: S.one, ag: S.ag } });
+      S: { g: S.g, gsig: S.gsig, r: S.r, qs: S.qs, nc: S.nc, qi: S.qi, a: S.a, phase: S.phase, rv: S.rv, one: S.one, ag: S.ag, man: S.man, fl: S.fl } });
   }
   // 続きからを選ばずに始めたら、前回の分は消す（箱を隠す・記録を消す・表示ページへの送りを戻す。kit の R.dismiss）
   function dropResume(){ RES.dismiss(); }
@@ -617,6 +639,9 @@ body.stream.in-game .ky-pos .k-seg>button{min-height:44px}
   // 表示ページは kit の KKit.openView（別窓 1280x720・背景は設定の6つ）。開けないときは知らせるだけ（操作画面は動かさない）
   function openView(){ if (!KKit.openView({ url: '/view/', ch: 'ky-view', name: 'kyView' })) toast('表示ページが開けません。ポップアップを許可して、もう一度押してください', 5000); }
   [].forEach.call(document.querySelectorAll('.ky-viewopen'), function(b){ b.addEventListener('click', openView); });
+  // 2026-10-23 答えの出し方：自分でめくる（押した人の答えから出る）／せーので全員（3・2・1 で一度に）。最初は 配信＝自分でめくる／ふだん＝せーので全員
+  function flipKey(){ return 'ky-flip-' + (STREAM ? 'stream' : 'room'); }
+  function flipPref(){ var v = lsGet(flipKey(), null); return v === 'man' ? true : v === 'auto' ? false : STREAM; }
   function saveCfg(){ lsSet('ky-cfg', { mode: S.mode, n: S.n, names: S.names, remote: S.remote, how: S.how, pack: S.pack, cnt: S.cnt, goal: S.goal, pos: S.pos }); }
   function nm(i){ var t = String(S.names[i] || '').trim(); return t || DEF[i]; }
   function names(){ var a = []; for (var i = 0; i < S.n; i++) a.push(nm(i)); return a; }
@@ -640,6 +665,7 @@ body.stream.in-game .ky-pos .k-seg>button{min-height:44px}
   function renderSetup(){
     var talk = S.mode === 'talk';
     $('howSec').hidden = talk || STREAM;
+    $('flipSec').hidden = talk || (!STREAM && S.how === 'each');   // 各自のスマホで見せ合うときは、答えがこの端末にないので出さない
     $('cntSeg').hidden = talk; $('goalBox').hidden = !talk;
     $('s4t').textContent = talk ? '目標の個数' : '問題数';
     $('gOut').textContent = S.goal;
@@ -692,7 +718,9 @@ body.stream.in-game .ky-pos .k-seg>button{min-height:44px}
   segBind('modeSeg', 'mode', function(){ return S.mode; }, function(v){ S.mode = v; }, function(){ renderSetup(); setupView(); });
   segBind('packSeg', 'pack', function(){ return S.pack; }, function(v){ S.pack = v; });
   segBind('cntSeg', 'n', function(){ return S.cnt; }, function(v){ S.cnt = +v; });
-  segBind('howSeg', 'how', function(){ return S.how; }, function(v){ S.how = v; });
+  segBind('howSeg', 'how', function(){ return S.how; }, function(v){ S.how = v; }, function(){ renderSetup(); });
+  // 2026-10-23 答えの出し方（配信とふだんで別に覚える）
+  segBind('flipSeg', 'flip', function(){ return flipPref() ? 'man' : 'auto'; }, function(v){ lsSet(flipKey(), v); track('ky_flip_mode', { v: v, stream: STREAM ? 1 : 0 }); });
   segBind('posSeg', 'pos', function(){ return S.pos; }, function(v){ S.pos = v; }, function(){ talkView(); });
   renderSetup();
 
@@ -889,6 +917,7 @@ body.stream.in-game .ky-pos .k-seg>button{min-height:44px}
     S.r++; S.one = false;
     var pk = pickQs(S.cnt, S.pack, S.n);
     S.qs = pk.ids; S.nc = pk.nc; S.qi = 0; S.a = []; S.rv = {}; S.ag = {};
+    S.man = flipPref(); S.fl = {};
     show('play');
     beginQ();
     track('ky_start', { mode: 'odai', pack: S.pack, n: S.n, stream: STREAM ? 1 : 0 });
@@ -913,10 +942,18 @@ body.stream.in-game .ky-pos .k-seg>button{min-height:44px}
   function chs(qi){ var o = BYID[S.qs[qi]]; return o.c.slice(0, S.nc[qi]); }
   // 各自のスマホで答えたとき：見せ合って「同じ答えがあったか」を1回押すだけ（だれと同じかは数えない）
   function eachMode(){ return !STREAM && !S.one && S.how === 'each'; }
+  // 自分でめくる：答えが届いていて、まだめくっていない人（押し忘れで後から入れた答えは、入れたときに見えている）
+  function manOn(){ return !!S.man && !S.one && !eachMode(); }
+  function isBack(qi, i){
+    if (!manOn()) return false;
+    var x = (S.a[qi] || [])[i], F = (S.fl && S.fl[qi]) || [];
+    return x != null && !x.late && F.indexOf(i) < 0;
+  }
+  function backCount(qi){ var k = 0; for (var i = 0; i < S.n; i++) if (isBack(qi, i)) k++; return k; }
   function groupsOf(qi){
     if (S.ag && S.ag[qi] != null) return S.ag[qi] >= 0 ? [{ c: S.ag[qi], m: [], ag: 1 }] : [];
-    var A = S.a[qi] || [], m = {};
-    for (var i = 0; i < S.n; i++) { var x = A[i]; if (x && typeof x.c === 'number' && x.c >= 0) (m[x.c] = m[x.c] || []).push(i); }
+    var A = S.a[qi] || [], m = {}, part = backCount(qi) > 0;   // めくっている途中は、めくった人の中で同じ答え
+    for (var i = 0; i < S.n; i++) { var x = A[i]; if (part && isBack(qi, i)) continue; if (x && typeof x.c === 'number' && x.c >= 0) (m[x.c] = m[x.c] || []).push(i); }
     return Object.keys(m).filter(function(k){ return m[k].length >= 2; }).map(function(k){ return { c: +k, m: m[k] }; });
   }
   function isRare(qi, g){ return !!BYID[S.qs[qi]].rare[g.c]; }
@@ -965,7 +1002,7 @@ body.stream.in-game .ky-pos .k-seg>button{min-height:44px}
       } else {
         var waiting = 0; for (var i = 0; i < S.n; i++) if (A[i] == null) waiting++;
         var redo2 = S.last >= 0 && A[S.last] != null && !A[S.last].code;
-        ar.innerHTML = '<div class="ky-cover"><p>' + (waiting ? (STREAM ? 'あとは回答コードを待つだけ。<br>届かない人の答えは、オープンのあとに押せます。' : 'せーので、みんなのスマホを見せ合おう。') : '全員の答えがそろいました。') + '</p>' + '<button type="button" class="k-btn k-btn-main k-btn-big" id="openGo">せーので オープン</button>'
+        ar.innerHTML = '<div class="ky-cover"><p>' + (waiting ? (STREAM ? 'あとは回答コードを待つだけ。<br>届かない人の答えは、オープンのあとに押せます。' : 'せーので、みんなのスマホを見せ合おう。') : '全員の答えがそろいました。') + '</p>' + '<button type="button" class="k-btn k-btn-main k-btn-big" id="openGo">' + (manOn() ? '答えを伏せて並べる' : 'せーので オープン') + '</button>'
           + (redo2 ? '<button type="button" class="k-btn k-btn-sub k-btn-sm" id="coverRedo" style="margin-top:12px">' + esc(san(nm(S.last))) + 'の答えをやり直す</button>' : '') + '</div>';
         $('openGo').onclick = doOpen;
         if (redo2) $('coverRedo').onclick = function(){ S.a[S.qi][S.last] = null; S.last = -1; S.turn = 0; S.cover = false; renderPlay(); };
@@ -992,6 +1029,11 @@ body.stream.in-game .ky-pos .k-seg>button{min-height:44px}
     }
   }
   function doOpen(){
+    if (manOn()) {   // 自分でめくる：3・2・1 はなし。伏せた答えを並べて、押した人から出す
+      S.phase = 'open'; S.fl[S.qi] = []; renderPlay();
+      track('ky_open', { how: 'man' });
+      return;
+    }
     var go = function(){ S.phase = 'open'; renderPlay(); stampOpen(); track('ky_open', { hit: groupsOf(S.qi).length ? 1 : 0 }); };
     viewSend(viewState('cd'));
     if (window.KKit && KKit.countdown && !reduced()) KKit.countdown(3, { onDone: go, step: 650 });
@@ -1006,13 +1048,14 @@ body.stream.in-game .ky-pos .k-seg>button{min-height:44px}
   function renderOpen(){
     var o = cur(), op = $('openArea'), A = S.a[S.qi], gs = groupsOf(S.qi), cs = chs(S.qi);
     var inG = function(i){ return gs.some(function(g){ return g.m.indexOf(i) >= 0; }); };
-    var missing = false, each = eachMode();
-    var h = S.one ? '<p class="ky-turn">せーので口で答えてもらい、それぞれの答えを押す</p>' : '';
-    h += '<ul class="ky-open">';
+    var missing = false, each = eachMode(), backN = backCount(S.qi), fresh = FLIP_FRESH; FLIP_FRESH = -1;
+    var h = S.one ? '<p class="ky-turn">せーので口で答えてもらい、それぞれの答えを押す</p>' : (backN ? '<p class="ky-turn">好きな人から押してめくる</p>' : '');
+    h += '<ul class="ky-open' + (manOn() ? ' man' : '') + '">';
     for (var i = 0; i < S.n; i++) {
       var lab = ansLabel(S.qi, i);
+      if (isBack(S.qi, i)) { h += '<li class="back"><button type="button" class="ky-flip" data-flip="' + i + '" aria-label="' + esc(san(nm(i))) + 'の答えをめくる"><span class="nm">' + esc(san(nm(i))) + '</span><span class="an">？</span></button></li>'; continue; }
       if (each && A[i] == null) { h += '<li class="wait"><span class="nm">' + esc(san(nm(i))) + '</span><span class="an">スマホの画面を見せる</span></li>'; continue; }
-      h += '<li class="' + (inG(i) ? 'hit' : '') + '"><span class="nm">' + esc(san(nm(i))) + '</span><span class="an">' + esc(lab || (S.one ? '…' : 'まだ')) + '</span>';
+      h += '<li class="' + (inG(i) ? 'hit' : '') + (i === fresh ? ' fresh' : '') + '"><span class="nm">' + esc(san(nm(i))) + '</span><span class="an">' + esc(lab || (S.one ? '…' : 'まだ')) + '</span>';
       if (A[i] == null || A[i].late) {
         if (A[i] == null) missing = true;
         h += '<div class="set"><div class="k-seg" role="group" data-seat="' + i + '">' + cs.map(function(c, k){ return '<button type="button" data-k="' + k + '" aria-pressed="' + (!!A[i] && A[i].c === k) + '">' + esc(c) + '</button>'; }).join('') + '<button type="button" data-k="-1" aria-pressed="' + (!!A[i] && A[i].c === -1) + '">とばす</button></div></div>';
@@ -1023,6 +1066,7 @@ body.stream.in-game .ky-pos .k-seg>button{min-height:44px}
     if (each && S.ag[S.qi] == null) {
       h += '<div class="ky-agree"><p>画面を見せ合って、同じ答えの人はいた？</p><div class="k-seg" role="group" id="agSeg">' + cs.map(function(c, k){ return '<button type="button" data-k="' + k + '">' + esc(c) + '</button>'; }).join('') + '<button type="button" data-k="-2">いなかった</button></div></div>';
     } else if (missing && !each) h += S.one ? '' : '<div class="ky-verdict miss"><p>届いていない人の答えを押してください</p></div>';
+    else if (backN) h += '';   // 判定は全部めくってから
     else {
       var hit = gs.length > 0, rare = gs.some(function(g){ return isRare(S.qi, g); });
       h += '<div class="ky-verdict">' + stampHtml(hit) + '<p>' + (rare ? '<span class="rare">レア！</span>' : '') + esc(verdictText(S.qi, gs)) + '</p></div>';
@@ -1031,7 +1075,10 @@ body.stream.in-game .ky-pos .k-seg>button{min-height:44px}
       if (each) h += '<p class="ky-note"><button type="button" class="k-link" id="agRedo" style="background:none;border:0;padding:0;font:inherit;cursor:pointer">押しまちがえたら、やり直す</button></p>';
       if (STREAM && o.h) h += '<p class="ky-note">表示ページに「コメントで、あなたは何派？」を出しています</p>';
     }
+    var hadFocus = document.activeElement && document.activeElement.classList && document.activeElement.classList.contains('ky-flip');
     op.innerHTML = h;
+    [].forEach.call(op.querySelectorAll('.ky-flip'), function(b){ b.addEventListener('click', function(){ flipSeat(+b.dataset.flip); }); });
+    if (hadFocus) { var nf = op.querySelector('.ky-flip'); if (nf) nf.focus(); }
     [].forEach.call(op.querySelectorAll('.k-seg[data-seat]'), function(seg){
       seg.addEventListener('click', function(e){ var b = e.target.closest('button'); if (!b) return; var i = +seg.dataset.seat;
         S.a[S.qi][i] = { c: +b.dataset.k, late: 1 }; renderPlay(); stampOpen(); });
@@ -1039,11 +1086,32 @@ body.stream.in-game .ky-pos .k-seg>button{min-height:44px}
     if ($('agSeg')) $('agSeg').addEventListener('click', function(e){ var b = e.target.closest('button'); if (!b) return; S.ag[S.qi] = +b.dataset.k; renderPlay(); stampOpen(); });
     if ($('agRedo')) $('agRedo').onclick = function(){ delete S.ag[S.qi]; renderPlay(); };
     var acts = $('playActs'), last = S.qi >= S.qs.length - 1;
-    acts.innerHTML = '<button type="button" class="k-btn k-btn-main" id="nextGo">' + (S.one ? '話に戻る' : (last ? 'まとめを見る' : '次のお題')) + '</button>';
+    acts.innerHTML = (backN && !FLIP_RUN ? '<button type="button" class="k-btn k-btn-sub ky-flipall" id="flipAll">残り' + backN + '人を全部めくる</button>' : '')
+      + '<button type="button" class="k-btn k-btn-main" id="nextGo">' + (S.one ? '話に戻る' : (last ? 'まとめを見る' : '次のお題')) + '</button>';
+    if ($('flipAll')) $('flipAll').onclick = function(){   // 「残りを全部めくる」（上から順に）
+      track('ky_flip_all', { rest: backCount(S.qi) });
+      var qi = S.qi; FLIP_RUN = true;
+      (function step(){
+        if (S.qi !== qi || S.phase !== 'open') { FLIP_RUN = false; return; }
+        var k = 0; while (k < S.n && !isBack(qi, k)) k++;
+        if (backCount(qi) <= 1) FLIP_RUN = false;
+        if (k < S.n) flipSeat(k);
+        if (FLIP_RUN) setTimeout(step, 300);
+      })();
+    };
     $('nextGo').onclick = function(){
+      FLIP_RUN = false;
       if (S.one) { backToTalk(); return; }
       if (last) showResult(); else { S.qi++; beginQ(); }
     };
+  }
+  var FLIP_FRESH = -1, FLIP_RUN = false;
+  function flipSeat(i){
+    if (!isBack(S.qi, i)) return;
+    (S.fl[S.qi] = S.fl[S.qi] || []).push(i);
+    FLIP_FRESH = i;
+    renderPlay();
+    if (!backCount(S.qi)) stampOpen();   // 最後の1人で判子
   }
   function fullHit(qi){ var gs = groupsOf(qi); return gs.filter(function(g){ return g.m.length === S.n; })[0] || null; }
   function backToTalk(){
@@ -1176,12 +1244,15 @@ body.stream.in-game .ky-pos .k-seg>button{min-height:44px}
     for (var i = 0; i < S.n; i++) { st.done.push(A[i] != null); st.uke.push(A[i] && A[i].code ? uke[i] : ''); }
     if (step === 'open') {
       var gs = groupsOf(S.qi), missing = false;
-      st.ans = []; for (var j = 0; j < S.n; j++) { st.ans.push(ansLabel(S.qi, j)); if (A[j] == null) missing = true; }
+      st.ans = []; for (var j = 0; j < S.n; j++) { st.ans.push(isBack(S.qi, j) ? null : ansLabel(S.qi, j)); if (A[j] == null) missing = true; }
+      // 2026-10-23 自分でめくる途中：めくった人の答えだけ送る（伏せた人は back）。古い表示ページは「…」のまま判定を出さない（missing）→全部めくると同じ結果
+      if (backCount(S.qi)) { st.man = 1; st.back = []; for (var b = 0; b < S.n; b++) st.back.push(isBack(S.qi, b)); missing = true; }
       st.hit = gs.map(function(g){ return g.m; });
       st.missing = missing;
       st.verdict = verdictText(S.qi, gs);
       st.rare = gs.some(function(g){ return isRare(S.qi, g); });
       st.follow = followOf(S.qi, gs.length > 0);
+      if (st.man) { st.verdict = ''; st.rare = false; st.follow = ''; }
     }
     return st;
   }

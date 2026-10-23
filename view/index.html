@@ -39,6 +39,10 @@
 .pl .an{display:block;font-family:var(--k-bold);line-height:1.12;word-break:auto-phrase}
 .pl.hit{border-color:var(--k-shu);border-width:max(4px,.44cqw);padding:max(4px,.65cqw) max(8px,1.1cqw)}
 .pl.hit .an{color:var(--k-shu)}
+.pl.back{border-style:dashed;border-color:#c8a77f;background:repeating-linear-gradient(45deg,#fbf1e2 0 .6cqw,#f4e4cc .6cqw 1.2cqw)}.pl.back .an{color:#a8501a}
+.pl.fresh .an{animation:kyFl .4s cubic-bezier(.3,1.6,.5,1) both}
+@keyframes kyFl{0%{transform:scale(.6);opacity:0}100%{transform:none;opacity:1}}
+@media (prefers-reduced-motion:reduce){.pl.fresh .an{animation:none}}
 .verdict{display:flex;align-items:center;gap:max(14px,1.75cqw);margin-top:max(8px,1.1cqw);font-size:var(--k-v-s);line-height:1.25;font-weight:800;min-height:max(84px,8cqw)}
 .verdict .k-stamp{flex:0 0 auto;width:max(84px,8cqw);height:max(84px,8cqw);font-size:var(--k-v-min);line-height:1.05;text-align:center}
 .rare{flex:none;display:inline-block;margin-right:max(8px,1cqw);padding:0 .35em;border:max(3px,.25cqw) solid var(--k-shu);border-radius:max(4px,.4cqw);color:var(--k-shu);font-family:var(--k-bold);font-weight:400}
@@ -219,6 +223,7 @@ body.vert #stp{left:3cqw;right:3cqw;top:auto;bottom:calc(var(--k-v-credit)*1.6 +
     }
     return h + '</div>';
   }
+  var flipK = '', flipSeen = {};
   function setTitle(t){ var e = $('ttl'); if (e.textContent !== t) { e.textContent = t; KKit.fitText(e, { min: 42 }); } }
   function render(s){
     cur = s;
@@ -263,7 +268,12 @@ body.vert #stp{left:3cqw;right:3cqw;top:auto;bottom:calc(var(--k-v-credit)*1.6 +
         var hs = {}; (s.hit || []).forEach(function(g){ g.forEach(function(i){ hs[i] = 1; }); });
         var fs = anSize(s.names.length);
         h += '<div class="players open" style="' + cols(s.names.length) + '">';
-        s.names.forEach(function(n, i){ h += '<div class="pl k-paper' + (hs[i] ? ' hit' : '') + '"><span class="nm">' + esc(san(n)) + '</span><span class="an" style="font-size:' + fs + '">' + esc(s.ans[i] || '…') + '</span></div>'; });
+        // 2026-10-23 自分でめくる途中：伏せた人は「？」（s.back）。めくった1人だけ動かす
+        var fk = s.qn + '|' + s.q; if (flipK !== fk) { flipK = fk; flipSeen = {}; }
+        s.names.forEach(function(n, i){
+          var bk = s.back && s.back[i], fr = s.man && !bk && s.ans[i] != null && !flipSeen[i]; if (!bk && s.ans[i] != null) flipSeen[i] = 1;
+          h += '<div class="pl k-paper' + (hs[i] ? ' hit' : '') + (bk ? ' back' : '') + (fr ? ' fresh' : '') + '"><span class="nm">' + esc(san(n)) + '</span><span class="an" style="font-size:' + fs + '">' + (bk ? '？' : esc(s.ans[i] || '…')) + '</span></div>';
+        });
         h += '</div>';
         if (!s.missing && !qrow) {
           var hit = (s.hit || []).length > 0;

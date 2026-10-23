@@ -283,6 +283,61 @@ body.stream.in-game .ky-top{display:none}
 body.stream.in-game .ky-playgrid{display:grid;grid-template-columns:1.25fr 1fr;gap:24px;align-items:start}
 body.stream.in-game .ky-q p{font-size:30px}
 body.stream.in-game .ky-choices{grid-template-columns:1fr 1fr}
+body.stream.in-game .ky-pos .k-seg>button{min-height:44px}
+
+/* ---- 2026-10-23 配信モードの始める前（設定）も1画面に（スクロールなし・縮めない） ----
+   左の段＝遊び方・人数と名前、右の段＝お題の種類・問題数・配信の設定・「はじめる」（ふつうのモードは今のまま）
+   入らなければ fit() が body[data-sfit] に段を足す: 1＝大見出しと説明・余白を詰める　2＝補足の小さい字（名前の注意・お題の数・見比べ・OBSの案内）を外す
+   3＝見出しを操作と同じ行に（STEP の札を外す）　4＝上の題字の行を外して行の間を詰める */
+@media (min-width:768px){
+  body.stream:not(.in-game) #app{max-width:1240px}
+  body.stream:not(.in-game) #setup{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);column-gap:36px;align-items:start;
+    grid-template-areas:"h h" "l l" "r r" "s1 p" "s2 p" "s2 c" "s2 st" "s2 go" "s2 ."}
+  body.stream:not(.in-game) #setup>h1{grid-area:h}
+  body.stream:not(.in-game) #setup>.ky-lead{grid-area:l}
+  body.stream:not(.in-game) #resumeBox{grid-area:r}
+  body.stream:not(.in-game) #setup>.ky-s1{grid-area:s1}
+  body.stream:not(.in-game) #secN{grid-area:s2}
+  body.stream:not(.in-game) #setup>.ky-packs{grid-area:p}
+  body.stream:not(.in-game) #setup>.ky-s4{grid-area:c}
+  body.stream:not(.in-game) #streamBox{grid-area:st;margin:12px 0 0}
+  body.stream:not(.in-game) #setup>.ky-start{grid-area:go}
+  body.stream:not(.in-game) .ky-start.k-fix{position:static;margin:16px 0 8px;padding:10px 12px}
+  body.stream:not(.in-game) #uniFoot{display:none}
+  body.stream:not(.in-game) .ky-packs .k-seg>button{flex-basis:33.34%}
+  body.stream:not(.in-game)[data-sfit~="1"] .ky-top{padding:6px 0}
+  body.stream:not(.in-game)[data-sfit~="1"] #setup>h1.ky-h1,body.stream:not(.in-game)[data-sfit~="1"] #setup>.ky-lead{display:none}
+  body.stream:not(.in-game)[data-sfit~="1"] .ky-sec{margin:10px 0 0}
+  body.stream:not(.in-game)[data-sfit~="1"] .ky-sec>h2{margin:0 0 6px}
+  body.stream:not(.in-game)[data-sfit~="1"] .ky-sub{margin-top:6px}
+  body.stream:not(.in-game)[data-sfit~="1"] .ky-names{margin-top:6px;gap:6px}
+  body.stream:not(.in-game)[data-sfit~="1"] #streamBox{margin:10px 0 0;padding:8px 0}
+  body.stream:not(.in-game)[data-sfit~="1"] .ky-start.k-fix{margin:8px 0 4px;padding:8px 10px}
+  body.stream:not(.in-game)[data-sfit~="1"] #modeSeg>button{min-height:48px;padding:2px 8px}
+  body.stream:not(.in-game)[data-sfit~="2"] #secN>.ky-note,body.stream:not(.in-game)[data-sfit~="2"] #packNote,body.stream:not(.in-game)[data-sfit~="2"] .ky-cmp,body.stream:not(.in-game)[data-sfit~="2"] #streamOn>.ky-note:first-child,body.stream:not(.in-game)[data-sfit~="2"] .k-view-open>p{display:none}
+  body.stream:not(.in-game)[data-sfit~="2"] #modeSeg>button small,body.stream:not(.in-game)[data-sfit~="2"] #packSeg>button small{display:none}
+  body.stream:not(.in-game)[data-sfit~="2"] #modeSeg>button,body.stream:not(.in-game)[data-sfit~="2"] #packSeg>button,body.stream:not(.in-game)[data-sfit~="2"] #howSeg>button{min-height:44px}
+  body.stream:not(.in-game)[data-sfit~="2"] .ky-sub:has(>.k-stream-title){display:flex;align-items:center;gap:10px}
+  body.stream:not(.in-game)[data-sfit~="2"] .ky-sub:has(>.k-stream-title)>.ky-lbl{margin:0;white-space:nowrap}
+  body.stream:not(.in-game)[data-sfit~="2"] .ky-sub>.k-stream-title{flex:1;min-width:0}
+  body.stream:not(.in-game)[data-sfit~="3"] .ky-sec>h2 .k-step{display:none}
+  body.stream:not(.in-game)[data-sfit~="3"] .ky-sec:is(.ky-s1,.ky-s4,#secN){display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;column-gap:12px}
+  body.stream:not(.in-game)[data-sfit~="3"] .ky-sec:is(.ky-s1,.ky-s4,#secN)>h2{margin:0;white-space:nowrap}
+  body.stream:not(.in-game)[data-sfit~="3"] .ky-sec:is(.ky-s1,.ky-s4,#secN)>:not(h2):not(.k-seg):not(.k-stepper){grid-column:1/-1}
+  body.stream:not(.in-game)[data-sfit~="3"] .ky-s4>.k-stepper{grid-column:2}
+  body.stream:not(.in-game)[data-sfit~="3"] #secN .k-stepper>button{width:44px;height:44px}
+  body.stream:not(.in-game)[data-sfit~="3"] .ky-packs .k-seg>button{flex:1 1 auto;padding:2px 6px;white-space:nowrap}
+  body.stream:not(.in-game)[data-sfit~="3"] #streamOn .ky-vlinks{gap:4px 10px;margin-top:6px}
+  body.stream:not(.in-game)[data-sfit~="3"] #streamOn .ky-vlinks>.k-live{white-space:nowrap}
+  body.stream:not(.in-game)[data-sfit~="3"] #streamBox h2{margin:0 0 2px}
+  /* 4＝続きからが出ているときなど: 上の題字の行を外し（遊ぶ画面と同じ）、行の間を詰める */
+  body.stream:not(.in-game)[data-sfit~="4"] .ky-top{display:none}
+  body.stream:not(.in-game)[data-sfit~="4"] #resumeBox{margin:4px 0 0;padding:4px 0}
+  body.stream:not(.in-game)[data-sfit~="4"] .ky-names{gap:4px}
+  body.stream:not(.in-game)[data-sfit~="4"] .ky-sec{margin-top:6px}
+  body.stream:not(.in-game)[data-sfit~="4"] .ky-start.k-fix{margin:6px 0 0;padding:6px 10px}
+  body.stream:not(.in-game)[data-sfit~="4"] #secN>.ky-names:not(:has(.k-seg)){grid-template-columns:1fr 1fr}
+}
 
 /* 2026-10-21 読みやすさ: kit の13pxの札・注記はこのサイトでは14pxに（kit 側の次の版で直すまでの上書き） */
 .k-tag,.k-upd,.k-result small,.k-install-t span,.k-teaser-asof,.k-teaser-host .mt-asof,.k-teaser-host .mt-badge,.k-seg>button small,.k-seg>label small{font-size:14px}
@@ -298,7 +353,7 @@ body.stream.in-game .ky-choices{grid-template-columns:1fr 1fr}
     <p class="ky-lead" id="lead">話しながら見つけた共通点を数えるか、お題に答えてせーので見せ合うか。2〜6人。</p>
     <div id="resumeBox" hidden></div>
 
-    <div class="ky-sec">
+    <div class="ky-sec ky-s1">
       <h2><span class="k-step">STEP 1</span>遊び方</h2>
       <div class="k-seg k-seg-2" role="group" id="modeSeg">
         <button type="button" data-mode="talk">話しながら探す<small>見つけたら書いて足す</small></button>
@@ -325,7 +380,7 @@ body.stream.in-game .ky-choices{grid-template-columns:1fr 1fr}
       <p class="ky-note" id="packNote"></p>
     </div>
 
-    <div class="ky-sec">
+    <div class="ky-sec ky-s4">
       <h2><span class="k-step">STEP 4</span><span id="s4t">問題数</span></h2>
       <div class="k-seg k-seg-3" role="group" id="cntSeg" style="max-width:360px">
         <button type="button" data-n="5">5問</button>
@@ -1167,6 +1222,16 @@ body.stream.in-game .ky-choices{grid-template-columns:1fr 1fr}
   function fitSoon(){ clearTimeout(fitT); fitT = setTimeout(fit, 30); }
   function fit(){
     var r = document.documentElement, b = document.body;
+    // 2026-10-23 始める前（設定）: 縮めずに、入らなければ並べ方を詰める（body[data-sfit] 1〜4）
+    if (STREAM && innerWidth >= 768 && !b.classList.contains('in-game')) {
+      r.style.removeProperty('--z'); r.style.removeProperty('--w'); $('uniFoot').style.display = '';
+      for (var lv = 0; lv <= 4; lv++) {
+        if (lv) b.dataset.sfit = [1, 2, 3, 4].slice(0, lv).join(' '); else delete b.dataset.sfit;
+        if (r.scrollHeight <= innerHeight + 1 && r.scrollWidth <= innerWidth + 1) break;
+      }
+      return;
+    }
+    delete b.dataset.sfit;
     if (!STREAM || !b.classList.contains('in-game') || innerWidth < 768) { r.style.removeProperty('--z'); r.style.removeProperty('--w'); $('uniFoot').style.display = ''; return; }
     $('uniFoot').style.display = 'none';
     // 幅1200で組む。狭いウィンドウ（960など）は縮めずに組む幅を狭める（縮めると字が14pxを切る）
@@ -1176,6 +1241,10 @@ body.stream.in-game .ky-choices{grid-template-columns:1fr 1fr}
     for (var i = 0; i < 40 && r.scrollHeight > innerHeight + 1 && z > 0.3; i++) { z *= 0.96; r.style.setProperty('--z', z.toFixed(3)); }
   }
   window.addEventListener('resize', fitSoon);
+  // 2026-10-23 始める前（設定）: 人数・遊び方・続きから・表示ページの札が変わったら測り直す
+  try { new MutationObserver(fitSoon).observe($('setup'), { childList: true, subtree: true, attributes: true, attributeFilter: ['hidden', 'class'] }); } catch (e) {}
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitSoon);
+  fitSoon();
   window.__ky = { S: S, T: T_(), startGame: startGame, startTalk: startTalk, talkAdd: talkAdd, acEncode: acEncode, acSeed: acSeed, names: names, doOpen: doOpen, showResult: showResult, answer: answer, renderPlay: renderPlay, acReceive: acReceive, pickQs: pickQs };
   function T_(){ return function(){ return T; }; }
 

@@ -220,6 +220,9 @@ h1.ky-h1{margin:24px 0 8px;font-family:var(--k-brush);font-weight:400;font-size:
 /* 結果 */
 .ky-res .k-result{margin:16px 0}
 .ky-res .k-result b{font-size:34px}
+/* 巻物の下の一言（共通点の個数に合わせる・2026-11-04） */
+.ky-word{margin:-4px 0 14px;text-align:center;font-size:18px;font-weight:800;line-height:1.45;color:var(--k-sumi)}
+.ky-word small{display:block;margin-top:2px;font-size:14px;font-weight:700;color:var(--k-text-2)}
 .ky-best{margin:16px 0 0;padding:12px 0;border-top:2px solid var(--k-sumi);border-bottom:1px solid var(--k-line-soft)}
 .ky-best small{display:block;font-size:14px;font-weight:700;color:var(--k-text-2)}
 .ky-best b{display:block;margin-top:4px;font-family:var(--k-bold);font-weight:400;font-size:22px;line-height:1.35;color:var(--k-shu)}
@@ -937,6 +940,7 @@ body.stream.in-game .ky-open.man .nm{white-space:nowrap;overflow:hidden;text-ove
   function showTalkResult(){
     var k = T.items.length, h = '';
     h += '<div class="k-result"><small>' + esc(names().map(san).join(' × ')) + 'の共通点</small><b class="k-num">' + k + '個</b><small>目標 ' + S.goal + '個' + (k >= S.goal ? '　達成' : '') + '　' + today() + '</small></div>';
+    h += wordHtml(k, S.goal);
     if (k) h += '<table class="k-table-result"><tbody>' + T.items.map(function(x, i){ return '<tr><td class="k-num" style="width:2em">' + (i + 1) + '</td><td>' + esc(x.t) + '</td></tr>'; }).join('') + '</tbody></table>';
     $('resBody').innerHTML = h;
     resButtons(true);
@@ -947,6 +951,16 @@ body.stream.in-game .ky-open.man .nm{white-space:nowrap;overflow:hidden;text-ove
     loadAd();
   }
 
+  // 巻物の下の一言。個数そのものではなく、目標（話しながら）や問題数（お題）に対する割合で段階を決める。相手をけなさない言い方で
+  function wordHtml(k, base){
+    var r = base > 0 ? k / base : 0, t, sub;
+    if (r < 0.25) { t = 'まだ知らないことだらけ'; sub = 'これから見つかる楽しみが、たくさん残っています'; }
+    else if (r < 0.45) { t = 'ちらほら似ているところあり'; sub = '話のきっかけが見つかりました'; }
+    else if (r < 0.65) { t = 'けっこう気が合う'; sub = '似ているところと、ちがうところがちょうどよく'; }
+    else if (r < 0.9) { t = 'かなり気が合う'; sub = '話が合うのも、うなずけます'; }
+    else { t = S.n === 2 ? 'ほぼ双子' : S.n === 3 ? 'ほぼ三つ子' : 'まるで兄弟姉妹'; sub = 'ここまでそろうのは、なかなかありません'; }
+    return '<p class="ky-word">' + t + '<small>' + sub + '</small></p>';
+  }
   function today(){ var d = new Date(); return d.getFullYear() + '.' + (d.getMonth() + 1) + '.' + d.getDate(); }
   // まとめのボタン：話しながら探すは「続ける」を主に（まとめを出しても消さない）
   function resButtons(talk){
@@ -1260,6 +1274,7 @@ body.stream.in-game .ky-open.man .nm{white-space:nowrap;overflow:hidden;text-ove
   function showResult(){
     var R = resultData(), B = bestText(R), h = '';
     h += '<div class="k-result"><small>' + (S.n === 2 ? esc(san(nm(0))) + 'と' + esc(san(nm(1))) + 'の' : 'みんなの') + '共通点</small><b class="k-num">' + R.hitQ + '個</b><small>' + R.total + '問中</small></div>';
+    h += wordHtml(R.hitQ, R.total);
     h += '<div class="ky-best"><small>いちばんレアな共通点</small>' + (B ? '<b>' + esc(B.a) + '</b><span>' + esc(B.q) + (B.who ? '　' + esc(B.who) : '') + '</span>' : '<b>こんどは全部ズレた</b><span>ズレた答えの話も、それはそれで盛り上がります。</span>') + '</div>';
     h += qListHtml(R.total);
     if (S.n >= 3 && !Object.keys(S.ag || {}).length) {
